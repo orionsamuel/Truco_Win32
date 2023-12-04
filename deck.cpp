@@ -1,5 +1,9 @@
 #include "deck.hpp"
 #include <string>
+#include <memory>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
 Deck::Deck() {
     std::vector<std::string> suits = {"Spades", "Hearts", "Clubs", "Diamonds"};
@@ -16,4 +20,20 @@ void Deck::displayDeck() {
     for (auto& card : cards) {
         card->displayCard();
     }
+}
+
+std::shared_ptr<Card> Deck::dealCard() {
+    if (cards.empty()) {
+        return nullptr;
+    }
+
+    std::shared_ptr<Card> dealtCard = cards.back();
+    cards.pop_back();
+    return dealtCard;
+}
+
+
+void Deck::shuffle() {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(cards.begin(), cards.end(), std::default_random_engine(seed));
 }
