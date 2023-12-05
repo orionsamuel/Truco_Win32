@@ -1,7 +1,9 @@
 #include "player.hpp"
 #include <iostream>
 
-Player::Player() {}
+Player::Player() {
+    score = 0;
+}
 
 void Player::drawCard(std::shared_ptr<Card> card) {
     hand.push_back(card);
