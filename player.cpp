@@ -13,3 +13,11 @@ void Player::showHand() {
         card->displayCard();
     }
 }
+
+void Player::setScore() {
+    score++;
+}
+
+int Player::getScore() {
+    return score;
+}
