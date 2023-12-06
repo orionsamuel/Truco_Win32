@@ -6,19 +6,22 @@
 #include <filesystem>
 #include <memory>
 #include <string>
+#include <vector>
 
 class GameController {
 public:
-    GameController();
+    GameController(int numPlayers);
     void startGame();
-    void playRound(std::shared_ptr<Player> currentPlayer, int currentPlayerNumber);
+    void playRound();
+    bool isGameOver();
     void saveGame(const std::string& filename);
     void loadGame(const std::string& filename);
 
 private:
     std::shared_ptr<Deck> gameDeck;
-    std::shared_ptr<Player> player1;
-    std::shared_ptr<Player> player2;
+    std::vector<std::shared_ptr<Player>> players;
+    int currentPlayerIndex = 0;
+    int numberOfPlayers;
     const int numCardsHand = 3;
     const int maxScore = 10;
 };

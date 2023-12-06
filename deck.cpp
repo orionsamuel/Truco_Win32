@@ -6,12 +6,12 @@
 #include <chrono>
 
 Deck::Deck() {
-    std::vector<std::string> suits = {"Spades", "Hearts", "Clubs", "Diamonds"};
-    std::vector<std::string> values = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Jack", "Queen", "King"};
-
-    for (const auto& suit : suits) {
-        for (const auto& value : values) {
-            cards.push_back(std::make_shared<Card>(suit, value));
+    for (int i = static_cast<int>(Suit::SPADES); i <= static_cast<int>(Suit::DIAMONDS); ++i) {
+        for (int j = static_cast<int>(Value::ACE); j <= static_cast<int>(Value::KING); ++j) {
+            std::shared_ptr<Card> newCard = std::make_shared<Card>();
+            newCard->setSuit(static_cast<Suit>(i));
+            newCard->setValue(static_cast<Value>(j));
+            cards.push_back(newCard);
         }
     }
 }

@@ -4,37 +4,48 @@
 
 namespace fs = std::filesystem;
 
-GameController::GameController() {
+GameController::GameController(int numPlayers) : numberOfPlayers(numPlayers) {
     gameDeck = std::make_shared<Deck>();
-    player1 = std::make_shared<Player>();
-    player2 = std::make_shared<Player>();
+    for (int i = 0; i < numberOfPlayers; ++i) {
+        players.push_back(std::make_shared<Player>());
+    }
 }
 
 void GameController::startGame() {
     for (int i = 0; i < numCardsHand; ++i) {
-        player1->drawCard(gameDeck->dealCard());
-        player2->drawCard(gameDeck->dealCard());
+        for (auto& player : players) {
+            player->drawCard(gameDeck->dealCard());
+        }
     }
 
-    playRound(player1, 1);
+    playRound();
 }
 
-void GameController::playRound(std::shared_ptr<Player> currentPlayer, int currentPlayerNumber) {
+void GameController::playRound() {
     //Game turn rules
-    currentPlayer->setScore();
-
+    players[currentPlayerIndex]->setScore();
+    
     //Define stop condition
-    if(player1->getScore() >= maxScore || player2->getScore() >= maxScore){
-        std::cout << "Game Over! Final scores - Player 1: " << player1->getScore() << " | Player 2: " << player2->getScore() << std::endl;
+    if (isGameOver()) {
+        std::cout << "Game Over!" << std::endl;
         return;
     }
-
-    int nextPlayerNumber = (currentPlayerNumber == 1) ? 2 : 1;
-    std::shared_ptr<Player> nextPlayer = (nextPlayerNumber == 1) ? player1 : player2;
+    
+    currentPlayerIndex = (currentPlayerIndex + 1) % numberOfPlayers;
 
     saveGame("game_state.txt");
-    playRound(nextPlayer, nextPlayerNumber);
+    playRound();
 
+}
+
+bool GameController::isGameOver() {
+    for (int i = 0; i < players.size(); ++i) {
+        if (players[i]->getScore() >= 10) {
+            std::cout << "Player " << i + 1 << " wins with 10 points!\n";
+            return true;
+        }
+    }
+    return false;
 }
 
 void GameController::saveGame(const std::string& filename) {
@@ -42,8 +53,9 @@ void GameController::saveGame(const std::string& filename) {
         fs::path filePath = fs::current_path() / filename;
         std::ofstream file(filePath);
         if (file.is_open()) {
-            file << "Score Player 1: " << player1->getScore() << std::endl;
-            file << "Score Player 2: " << player2->getScore() << std::endl;
+            for (int i = 0; i < players.size(); ++i) {
+                file << "Player " << i + 1 << " Score: " << players[i]->getScore() << "\n";
+            }
             file.close();
             std::cout << "Game state saved successfully.\n";
         } else {
