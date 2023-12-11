@@ -1,26 +1,30 @@
-#include "card.hpp"
+#include "card.h"
+#include "pch.h"
 #include <iostream>
 
-Card::Card() {}
-
-void Card::setSuit(Suit s) {
+void Card::setSuit(Suit s)
+{
     suit = s;
 }
 
-Suit Card::getSuit() const {
+Suit Card::getSuit() const
+{
     return suit;
 }
 
-void Card::setValue(Value v) {
+void Card::setValue(Value v)
+{
     value = v;
 }
 
-Value Card::getValue() const {
+Value Card::getValue() const
+{
     return value;
 
 }
 
-void Card::displayCard() {
+void Card::displayCard() const
+{
     //TODO: modify when uses UI
     std::string suitStr;
     std::string valueStr;

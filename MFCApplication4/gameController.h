@@ -1,8 +1,7 @@
-#ifndef GAME_CONTROLLER_H
-#define GAME_CONTROLLER_H
+#pragma once
 
-#include "deck.hpp"
-#include "player.hpp"
+#include "deck.h"
+#include "player.h"
 #include <filesystem>
 #include <memory>
 #include <string>
@@ -25,5 +24,3 @@ private:
     const int numCardsHand = 3;
     const int maxScore = 10;
 };
-
-#endif // GAME_CONTROLLER_H

@@ -1,19 +1,16 @@
-#ifndef DECK_H
-#define DECK_H
+#pragma once
 
-#include "card.hpp"
+#include "card.h"
 #include <memory>
 #include <vector>
 
 class Deck {
 public:
     Deck();
-    void displayDeck();
+    void displayDeck() const;
     std::shared_ptr<Card> dealCard();
     void shuffle();
 
 private:
     std::vector<std::shared_ptr<Card>> cards;
 };
-
-#endif // DECK_H
