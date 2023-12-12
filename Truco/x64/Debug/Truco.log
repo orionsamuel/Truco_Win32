@@ -1,0 +1,12 @@
+﻿  card.cpp
+  CmyWnd.cpp
+  deck.cpp
+C:\Projects\projetofinal\Truco_Win32\Truco\deck.cpp(45,73): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=std::chrono::system_clock::rep
+          ]
+  gameController.cpp
+  main.cpp
+  player.cpp
+  Truco.vcxproj -> C:\Projects\projetofinal\Truco_Win32\x64\Debug\Truco.exe
