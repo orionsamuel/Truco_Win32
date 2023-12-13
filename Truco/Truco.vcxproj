@@ -189,6 +189,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="cardController.cpp" />
+    <ClCompile Include="cardView.cpp" />
     <ClCompile Include="CmyWnd.cpp" />
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="gameController.cpp" />
@@ -197,6 +199,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h" />
+    <ClInclude Include="cardController.h" />
+    <ClInclude Include="cardView.h" />
     <ClInclude Include="CmyWnd.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="framework.h" />

@@ -6,40 +6,40 @@
 #include <random>
 #include <chrono>
 
-Deck::Deck() {
+deck::deck() {
     for (auto i = static_cast<int>(Suit::SPADES); i <= static_cast<int>(Suit::DIAMONDS); ++i)
     {
         for (auto j = static_cast<int>(Value::ACE); j <= static_cast<int>(Value::KING); ++j)
         {
-            auto newCard = std::make_shared<Card>();
-            newCard->setSuit(static_cast<Suit>(i));
-            newCard->setValue(static_cast<Value>(j));
-            cards.push_back(newCard);
+            auto newcard = std::make_shared<card>();
+            newcard->setSuit(static_cast<Suit>(i));
+            newcard->setValue(static_cast<Value>(j));
+            cards.push_back(newcard);
         }
     }
 }
 
-void Deck::displayDeck() const
+void deck::displaydeck() const
 {
     for (auto& card : cards)
     {
-        card->displayCard();
+        card->displaycard();
     }
 }
 
-std::shared_ptr<Card> Deck::dealCard()
+std::shared_ptr<card> deck::dealcard()
 {
     if (cards.empty()) {
         return nullptr;
     }
 
-    std::shared_ptr<Card> dealtCard = cards.back();
+    std::shared_ptr<card> dealtcard = cards.back();
     cards.pop_back();
-    return dealtCard;
+    return dealtcard;
 }
 
 
-void Deck::shuffle()
+void deck::shuffle()
 {
     auto seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::shuffle(cards.begin(), cards.end(), std::default_random_engine(seed));

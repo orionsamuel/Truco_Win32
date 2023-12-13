@@ -2,28 +2,28 @@
 #include "pch.h"
 #include <iostream>
 
-void Card::setSuit(Suit s)
+void card::setSuit(Suit s)
 {
     suit = s;
 }
 
-Suit Card::getSuit() const
+Suit card::getSuit() const
 {
     return suit;
 }
 
-void Card::setValue(Value v)
+void card::setValue(Value v)
 {
     value = v;
 }
 
-Value Card::getValue() const
+Value card::getValue() const
 {
     return value;
 
 }
 
-void Card::displayCard() const
+void card::displaycard() const
 {
     //TODO: modify when uses UI
     std::string suitStr;

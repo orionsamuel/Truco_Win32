@@ -1,18 +1,17 @@
 #pragma once
-
 #include "card.h"
 #include <vector>
 #include <memory>
 
-class Player {
+class player {
 public:
-    Player() = default;
-    void drawCard(std::shared_ptr<Card> card);
+    player() = default;
+    void drawcard(std::shared_ptr<card> card);
     void showHand() const;
     void setScore();
     int getScore() const;
 
 private:
-    std::vector<std::shared_ptr<Card>> hand;
+    std::vector<std::shared_ptr<card>> hand;
     int score = 0;
 };
