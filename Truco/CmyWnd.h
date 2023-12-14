@@ -14,6 +14,4 @@ private:
 	card c;
 	cardController cc;
 	cardView cv;
-	CButton button;
-	CEdit editTextfield;
 };

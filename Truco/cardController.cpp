@@ -3,7 +3,7 @@
 
 cardController::cardController(card& c, cardView& cv) : c(c), cv(cv) {}
 
-void cardController::OnButtonClick()
+void cardController::displayCard()
 {
 	cv.displayCard(c);
 }

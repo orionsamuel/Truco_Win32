@@ -10,6 +10,6 @@ class cardController
 public:
 	cardController() = default;
 	cardController(card& c, cardView& cv);
-	void OnButtonClick();
+	void displayCard();
 };
 

@@ -1,15 +1,16 @@
 #pragma once
 #include "card.h"
-//#include "afxwin.h"
 
 class cardView
 {
 private:
-	//CEdit valueTextfield;
-	//CEdit suitTextfield;
+	CEdit* valueTextfield = new CEdit;
+	CEdit* suitTextfield = new CEdit;
+	CButton* button = new CButton;
+
 
 public:
-	cardView();
+	cardView() = default;
 	explicit cardView(CFrameWnd* parent);
 	void displayCard(card c) const;
 };

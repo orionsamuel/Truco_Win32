@@ -12,9 +12,10 @@ CMyWnd::CMyWnd()
 }
 
 BEGIN_MESSAGE_MAP(CMyWnd, CFrameWnd)
-	//ON_COMMAND(1, OnButtonClick)
+	ON_COMMAND(1, OnButtonClick)
 END_MESSAGE_MAP()
 
 void CMyWnd::OnButtonClick()
 {
+	cc.displayCard();
 }
