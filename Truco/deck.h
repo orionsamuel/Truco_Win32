@@ -4,13 +4,13 @@
 #include <memory>
 #include <vector>
 
-class Deck {
+class deck {
 public:
-    Deck();
-    void displayDeck() const;
-    std::shared_ptr<Card> dealCard();
+    deck();
+    void displaydeck() const;
+    std::shared_ptr<card> dealcard();
     void shuffle();
 
 private:
-    std::vector<std::shared_ptr<Card>> cards;
+    std::vector<std::shared_ptr<card>> cards;
 };

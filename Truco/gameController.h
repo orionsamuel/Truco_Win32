@@ -9,7 +9,7 @@
 
 class GameController {
 public:
-    GameController(int numPlayers);
+    GameController(int numplayers);
     void startGame();
     void playRound();
     bool isGameOver();
@@ -17,10 +17,10 @@ public:
     void loadGame(const std::string& filename);
 
 private:
-    std::shared_ptr<Deck> gameDeck;
-    std::vector<std::shared_ptr<Player>> players;
-    int currentPlayerIndex = 0;
-    int numberOfPlayers;
-    const int numCardsHand = 3;
+    std::shared_ptr<deck> gamedeck;
+    std::vector<std::shared_ptr<player>> players;
+    int currentplayerIndex = 0;
+    int numberOfplayers;
+    const int numcardsHand = 3;
     const int maxScore = 10;
 };

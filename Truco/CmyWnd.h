@@ -1,4 +1,8 @@
 #pragma once
+#include "card.h"
+#include "cardController.h"
+#include "cardView.h"
+
 class CMyWnd : public CFrameWnd
 {
 public:
@@ -7,7 +11,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	CButton button;
-	CEdit editTextfield;
+	card c;
+	cardController cc;
+	cardView cv;
 };
-

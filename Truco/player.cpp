@@ -2,26 +2,26 @@
 #include "player.h"
 #include <iostream>
 
-void Player::drawCard(std::shared_ptr<Card> card)
+void player::drawcard(std::shared_ptr<card> card)
 {
     hand.push_back(card);
 }
 
-void Player::showHand() const
+void player::showHand() const
 {
-    std::cout << "Player's hand:" << std::endl;
+    std::cout << "player's hand:" << std::endl;
     for (const auto& card : hand)
     {
-        card->displayCard();
+        card->displaycard();
     }
 }
 
-void Player::setScore()
+void player::setScore()
 {
     score++;
 }
 
-int Player::getScore() const
+int player::getScore() const
 {
     return score;
 }

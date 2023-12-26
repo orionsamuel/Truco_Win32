@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Views\Windows">
       <UniqueIdentifier>{f509519a-4134-4ef5-b21b-6f486cf9250d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{a7effb72-dfb3-4dff-be44-a7e6912f4b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{01e2d037-e728-4fc7-a4d5-e5816e6cc060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,11 +51,17 @@
     <ClCompile Include="player.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
-    <ClCompile Include="gameController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CmyWnd.cpp">
       <Filter>Source Files\Views\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="gameController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="cardController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="cardView.cpp">
+      <Filter>Source Files\Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,15 +86,21 @@
     <ClInclude Include="player.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="gameController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CmyWnd.h">
       <Filter>Header Files\Views\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="gameController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="cardController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="cardView.h">
+      <Filter>Header Files\Views</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MFCApplication4.rc">
+    <ResourceCompile Include="Truco.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

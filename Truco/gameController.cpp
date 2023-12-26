@@ -5,17 +5,17 @@
 
 namespace fs = std::filesystem;
 
-GameController::GameController(int numPlayers) : numberOfPlayers(numPlayers) {
-    gameDeck = std::make_shared<Deck>();
-    for (int i = 0; i < numberOfPlayers; ++i) {
-        players.push_back(std::make_shared<Player>());
+GameController::GameController(int numplayers) : numberOfplayers(numplayers) {
+    gamedeck = std::make_shared<deck>();
+    for (int i = 0; i < numberOfplayers; ++i) {
+        players.push_back(std::make_shared<player>());
     }
 }
 
 void GameController::startGame() {
-    for (int i = 0; i < numCardsHand; ++i) {
+    for (int i = 0; i < numcardsHand; ++i) {
         for (auto& player : players) {
-            player->drawCard(gameDeck->dealCard());
+            player->drawcard(gamedeck->dealcard());
         }
     }
 
@@ -24,7 +24,7 @@ void GameController::startGame() {
 
 void GameController::playRound() {
     //Game turn rules
-    players[currentPlayerIndex]->setScore();
+    players[currentplayerIndex]->setScore();
     
     //Define stop condition
     if (isGameOver()) {
@@ -32,7 +32,7 @@ void GameController::playRound() {
         return;
     }
     
-    currentPlayerIndex = (currentPlayerIndex + 1) % numberOfPlayers;
+    currentplayerIndex = (currentplayerIndex + 1) % numberOfplayers;
 
     saveGame("game_state.txt");
     playRound();
@@ -42,7 +42,7 @@ void GameController::playRound() {
 bool GameController::isGameOver() {
     for (int i = 0; i < players.size(); ++i) {
         if (players[i]->getScore() >= 10) {
-            std::cout << "Player " << i + 1 << " wins with 10 points!\n";
+            std::cout << "player " << i + 1 << " wins with 10 points!\n";
             return true;
         }
     }
@@ -55,7 +55,7 @@ void GameController::saveGame(const std::string& filename) {
         std::ofstream file(filePath);
         if (file.is_open()) {
             for (int i = 0; i < players.size(); ++i) {
-                file << "Player " << i + 1 << " Score: " << players[i]->getScore() << "\n";
+                file << "player " << i + 1 << " Score: " << players[i]->getScore() << "\n";
             }
             file.close();
             std::cout << "Game state saved successfully.\n";

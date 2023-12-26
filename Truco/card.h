@@ -4,14 +4,14 @@
 enum class Suit { SPADES, HEARTS, CLUBS, DIAMONDS };
 enum class Value { ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, JACK, QUEEN, KING };
 
-class Card {
+class card {
 public:
-    Card() = default;
+    card() = default;
     void setSuit(Suit s);
     Suit getSuit() const;
     void setValue(Value v);
     Value getValue() const;
-    void displayCard() const;
+    void displaycard() const;
 
 private:
     Suit suit;
