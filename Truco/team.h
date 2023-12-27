@@ -4,7 +4,7 @@
 
 class team {
 public:
-    team() = default;
+    team();
     team(int const& teamId, std::string const& teamName, std::vector<player> const& members, int const& score);
 
     int getId() const;
