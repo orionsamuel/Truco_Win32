@@ -1,17 +1,17 @@
 #pragma once
 #include "card.h"
+#include "deck.h"
 #include <vector>
 #include <memory>
+#include <string>
 
 class player {
 public:
     player() = default;
     void drawcard(std::shared_ptr<card> card);
-    void showHand() const;
-    void setScore();
-    int getScore() const;
+    void showCard() const;
 
 private:
-    std::vector<std::shared_ptr<card>> hand;
-    int score = 0;
+    std::string name;
+    deck cardList;
 };

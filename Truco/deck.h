@@ -7,10 +7,11 @@
 class deck {
 public:
     deck();
-    void displaydeck() const;
     std::shared_ptr<card> dealcard();
     void shuffle();
+    void addCard(std::shared_ptr<card> card);
+    void showCard() const;
 
 private:
-    std::vector<std::shared_ptr<card>> cards;
+    std::vector<std::shared_ptr<card>> baseCards;
 };
