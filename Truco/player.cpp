@@ -2,26 +2,22 @@
 #include "player.h"
 #include <iostream>
 
+std::string player::getName()
+{
+    return name;
+}
+
+void player::setName(std::string name) const
+{
+    this->name = name;
+}
+
 void player::drawcard(std::shared_ptr<card> card)
 {
-    hand.push_back(card);
+    cardList.addCard(card);
 }
 
-void player::showHand() const
+void player::showCard() const
 {
-    std::cout << "player's hand:" << std::endl;
-    for (const auto& card : hand)
-    {
-        card->displaycard();
-    }
-}
-
-void player::setScore()
-{
-    score++;
-}
-
-int player::getScore() const
-{
-    return score;
+    cardList.showCard();
 }
