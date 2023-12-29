@@ -1,15 +1,25 @@
 #pragma once
+#include <ctime>
+#include <random>
+#include <string>
+
 #include "card.h"
 #include "cardView.h"
+#include "enums.h"
 
 class cardController
 {
-	card c;
-	cardView cv;
-
 public:
 	cardController() = default;
 	cardController(card& c, cardView& cv);
+	void createCard(Suit s, Value v);
 	void displayCard();
+	card getCard();
+	Suit getSuit();
+	Value getValue();
+
+private:
+	card c;
+	cardView cv;
 };
 
