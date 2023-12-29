@@ -213,6 +213,11 @@
   <ItemGroup>
     <ResourceCompile Include="Truco.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="background.bmp" />
+    <Image Include="res\MFCApplication4.ico" />
+    <Image Include="res\MFCApplication4Doc.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
