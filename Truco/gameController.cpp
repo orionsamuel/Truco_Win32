@@ -5,57 +5,91 @@
 
 namespace fs = std::filesystem;
 
-GameController::GameController(int numplayers) : numberOfplayers(numplayers) {
-    gamedeck = std::make_shared<deck>();
-    for (int i = 0; i < numberOfplayers; ++i) {
-        players.push_back(std::make_shared<player>());
+void gameController::createGame()
+{
+    try {
+        handSettings.createGame();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error creating game: " << e.what() << std::endl;
     }
 }
 
-void GameController::startGame() {
-    for (int i = 0; i < numcardsHand; ++i) {
-        for (auto& player : players) {
-            player->drawcard(gamedeck->dealcard());
+void gameController::loadPlayers(int quantity)
+{
+    try {
+        for (int i = 0; i < quantity; i++) {
+            players.push_back(std::make_shared<playerController>());
+            players[i]->createPlayer("Player " + std::to_string(i + 1));
         }
     }
-
-    playRound();
-}
-
-void GameController::playRound() {
-    //Game turn rules
-    players[currentplayerIndex]->setScore();
-    
-    //Define stop condition
-    if (isGameOver()) {
-        std::cout << "Game Over!" << std::endl;
-        return;
+    catch (const std::exception& e) {
+        std::cerr << "Error loading players: " << e.what() << std::endl;
     }
-    
-    currentplayerIndex = (currentplayerIndex + 1) % numberOfplayers;
-
-    saveGame("game_state.txt");
-    playRound();
-
 }
 
-bool GameController::isGameOver() {
-    for (int i = 0; i < players.size(); ++i) {
-        if (players[i]->getScore() >= 10) {
-            std::cout << "player " << i + 1 << " wins with 10 points!\n";
-            return true;
+void gameController::startGame() 
+{
+    try {
+        handSettings.setStartPlayer();
+        handSettings.setManilha();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error starting game: " << e.what() << std::endl;
+    }
+}
+
+void gameController::showScore()
+{
+    try {
+        for (int i = 0; i < teamSettings.length; i++) {
+            std::cout << "Team " << i + 1 << " score: " << teamSettings[i].showScore() << std::endl;
         }
     }
-    return false;
+    catch (const std::exception& e) {
+        std::cerr << "Error showing score: " << e.what() << std::endl;
+    }
 }
 
-void GameController::saveGame(const std::string& filename) {
+void gameController::addHandToList()
+{
+
+}
+
+void gameController::showWinner()
+{
+    try {
+        TeamController* winner = nullptr;
+
+        for (auto& team : teamSettings) {
+            int currentScore = team.getScore();
+
+            if (currentScore >= 12) {
+                winner = &team;
+            }
+        }
+
+        if (winner != nullptr) {
+            std::cout << "Team " << winner->getTeamName() << " is the winner with a score of " << winner->getScore() << std::endl;
+        }
+        else {
+            std::cout << "No winner yet." << std::endl;
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error showing winner: " << e.what() << std::endl;
+        // Trate a exceção de acordo, por exemplo, registre-a ou lance novamente
+    }
+}
+
+void gameController::saveGame(const std::string& filename) 
+{
     try {
         fs::path filePath = fs::current_path() / filename;
         std::ofstream file(filePath);
         if (file.is_open()) {
-            for (int i = 0; i < players.size(); ++i) {
-                file << "player " << i + 1 << " Score: " << players[i]->getScore() << "\n";
+            for (int i = 0; i < teamSettings.size(); ++i) {
+                file << "Team " << i + 1 << " Score: " << teamSettings[i]->getScore() << "\n";
             }
             file.close();
             std::cout << "Game state saved successfully.\n";
@@ -67,7 +101,8 @@ void GameController::saveGame(const std::string& filename) {
     }
 }
 
-void GameController::loadGame(const std::string& filename) {
+void gameController::loadGame(const std::string& filename) 
+{
     try {
         fs::path filePath = fs::current_path() / filename;
         if (fs::exists(filePath)) {

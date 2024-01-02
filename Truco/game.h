@@ -6,11 +6,11 @@
 #include "player.h"
 #include "team.h"
 
-classs game{
+class game {
 public:
 	game() = default;
 
-	palyer winnerPlayer;
+	player winnerPlayer;
 	std::vector<std::shared_ptr<player>> playerList;
 	std::vector<std::shared_ptr<hand>> handList;
 	std::vector<std::shared_ptr<team>> teamList;
