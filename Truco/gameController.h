@@ -24,7 +24,7 @@ private:
     void createHand();
 
     game gameSettings;
-    handController handSettings;
-    std::vector< std::shared_ptr <teamController>> teamSettings;
+    /*handController handSettings;
+    std::vector< std::shared_ptr <teamController>> teamSettings;*/
     std::vector<std::shared_ptr<playerController>> players;
 };

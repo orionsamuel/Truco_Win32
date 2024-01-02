@@ -7,12 +7,12 @@ namespace fs = std::filesystem;
 
 void gameController::createGame()
 {
-    try {
+   /* try {
         handSettings.createGame();
     }
     catch (const std::exception& e) {
         std::cerr << "Error creating game: " << e.what() << std::endl;
-    }
+    }*/
 }
 
 void gameController::loadPlayers(int quantity)
@@ -30,25 +30,25 @@ void gameController::loadPlayers(int quantity)
 
 void gameController::startGame() 
 {
-    try {
+    /*try {
         handSettings.setStartPlayer();
         handSettings.setManilha();
     }
     catch (const std::exception& e) {
         std::cerr << "Error starting game: " << e.what() << std::endl;
-    }
+    }*/
 }
 
 void gameController::showScore()
 {
-    try {
+    /*try {
         for (int i = 0; i < teamSettings.length; i++) {
             std::cout << "Team " << i + 1 << " score: " << teamSettings[i].showScore() << std::endl;
         }
     }
     catch (const std::exception& e) {
         std::cerr << "Error showing score: " << e.what() << std::endl;
-    }
+    }*/
 }
 
 void gameController::addHandToList()
@@ -58,28 +58,28 @@ void gameController::addHandToList()
 
 void gameController::showWinner()
 {
-    try {
-        TeamController* winner = nullptr;
+    //try {
+    //    TeamController* winner = nullptr;
 
-        for (auto& team : teamSettings) {
-            int currentScore = team.getScore();
+    //    for (auto& team : teamSettings) {
+    //        int currentScore = team.getScore();
 
-            if (currentScore >= 12) {
-                winner = &team;
-            }
-        }
+    //        if (currentScore >= 12) {
+    //            winner = &team;
+    //        }
+    //    }
 
-        if (winner != nullptr) {
-            std::cout << "Team " << winner->getTeamName() << " is the winner with a score of " << winner->getScore() << std::endl;
-        }
-        else {
-            std::cout << "No winner yet." << std::endl;
-        }
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Error showing winner: " << e.what() << std::endl;
-        // Trate a exceção de acordo, por exemplo, registre-a ou lance novamente
-    }
+    //    if (winner != nullptr) {
+    //        std::cout << "Team " << winner->getTeamName() << " is the winner with a score of " << winner->getScore() << std::endl;
+    //    }
+    //    else {
+    //        std::cout << "No winner yet." << std::endl;
+    //    }
+    //}
+    //catch (const std::exception& e) {
+    //    std::cerr << "Error showing winner: " << e.what() << std::endl;
+    //    // Trate a exceção de acordo, por exemplo, registre-a ou lance novamente
+    //}
 }
 
 void gameController::saveGame(const std::string& filename) 
