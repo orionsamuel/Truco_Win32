@@ -1,26 +1,30 @@
 #pragma once
 
 #include "deck.h"
-#include "player.h"
+#include "game.h"
+#include "playerController.h"
 #include <filesystem>
 #include <memory>
 #include <string>
 #include <vector>
 
-class GameController {
+class gameController {
 public:
-    GameController(int numplayers);
+    GameController() = default;
+    void createGame();
+    void loadPlayers(int quantity);
     void startGame();
-    void playRound();
-    bool isGameOver();
+    void showScore();
+    void addHandToList();
+    void showWinner();
     void saveGame(const std::string& filename);
     void loadGame(const std::string& filename);
 
 private:
-    std::shared_ptr<deck> gamedeck;
-    std::vector<std::shared_ptr<player>> players;
-    int currentplayerIndex = 0;
-    int numberOfplayers;
-    const int numcardsHand = 3;
-    const int maxScore = 10;
+    void createHand();
+
+    game gameSettings;
+    /*handController handSettings;
+    std::vector< std::shared_ptr <teamController>> teamSettings;*/
+    std::vector<std::shared_ptr<playerController>> players;
 };
