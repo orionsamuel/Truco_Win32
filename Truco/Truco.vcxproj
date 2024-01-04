@@ -192,6 +192,7 @@
     <ClCompile Include="cardController.cpp" />
     <ClCompile Include="cardView.cpp" />
     <ClCompile Include="CmyWnd.cpp" />
+    <ClCompile Include="customButton.cpp" />
     <ClCompile Include="deck.cpp" />
     <ClCompile Include="gameController.cpp" />
     <ClCompile Include="main.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="cardController.h" />
     <ClInclude Include="cardView.h" />
     <ClInclude Include="CmyWnd.h" />
+    <ClInclude Include="customButton.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="gameController.h" />

@@ -27,7 +27,7 @@ CMyWnd::CMyWnd()
 	player4 = cardController(this, "player4", baseId, 10, (maxHeight - 200) / 2, false);
 	player4.createDeck();
 
-
+	//botão com background
 	CButton* bmpButton1 = new CButton;
 	bmpButton1->Create(_T("Bitmap"), WS_CHILD | WS_VISIBLE | BS_BITMAP, CRect(100, 100, 200, 330), this, 3);
 
@@ -40,13 +40,19 @@ BEGIN_MESSAGE_MAP(CMyWnd, CFrameWnd)
 	ON_COMMAND(1, OnButtonClick)
 END_MESSAGE_MAP()
 
+//Evento acionado quando algum botão é clicado
 BOOL CMyWnd::OnCommand(WPARAM wParam, LPARAM lParam) {
 
+	//wParam, no OnCommand, corresponde ao id do botão clicado
 	ExecuteActionById(wParam);
 
 	return CWnd::OnCommand(wParam, lParam);
 }
 
+/// <summary>
+/// Executa ação de botão pelo Id dele
+/// </summary>
+/// <param name="wParam">Id do botão clicado</param>
 void CMyWnd::ExecuteActionById(WPARAM wParam)
 {
 	if (wParam >= player4.getBaseId()) {

@@ -36,7 +36,7 @@ CRect cardController::createCard(int posX, int posY) const {
 
 	int bottom = posY + 100;
 	if (!_isVertical) {
-		bottom = posY + 50;
+		bottom = posY + 40;
 	}
 
 	return CRect(left, top, right, bottom);
@@ -53,13 +53,22 @@ void cardController::displayCard()
 	int posX = _cardPosX;
 	int posY = _cardPosY;
 
+	int labelPosX = posX - 70;
+	int labelPosY = posY;
+	int width = posX + 30;
+	int height = posY + 20;
+
 	CStatic* label = new CStatic{};
-	if (_isVertical) {
-		label->Create(_playerName, WS_CHILD | WS_VISIBLE, CRect(posX - 70, posY, posX + 30, posY + 20), _parent, id);
+	if (!_isVertical) {
+		//label->Create(_playerName, WS_CHILD | WS_VISIBLE, CRect(posX - 70, posY, posX + 30, posY + 20), _parent, id);
+		labelPosX = posX;
+		labelPosY = posY - 30;
+		width = posX + 100;
+		height = posY - 10;
+		//label->Create(_playerName, WS_CHILD | WS_VISIBLE, CRect(posX, posY - 30, posX + 100, posY - 10), _parent, id);
 	}
-	else {
-		label->Create(_playerName, WS_CHILD | WS_VISIBLE, CRect(posX, posY - 30, posX + 100, posY - 10), _parent, id);
-	}
+
+	label->Create(_playerName, WS_CHILD | WS_VISIBLE, CRect(labelPosX, labelPosY, width, height), _parent, id);
 
 	for (auto& c : cards) {
 
@@ -67,8 +76,12 @@ void cardController::displayCard()
 
 		//LPCTSTR name = (LPCTSTR)c->c_str();
 
-		CButton* newButton = new CButton;
-		newButton->Create(c, WS_CHILD | WS_VISIBLE, createCard(posX, posY), _parent, id);
+		/*CButton* newButton = new CButton;
+		newButton->Create(c, WS_CHILD | WS_VISIBLE, createCard(posX, posY), _parent, id);*/
+		//buttons.insert(std::make_pair(id, newButton));
+
+		customButton* newButton = new customButton;
+		newButton->create(_isVertical, c, posX, posY, _parent, id);
 		buttons.insert(std::make_pair(id, newButton));
 
 		if (_isVertical) {
@@ -89,5 +102,14 @@ int cardController::getBaseId()
 void cardController::selectCard(int cardId)
 {
 	//buttons[cardId]->ShowWindow(SW_HIDE);
-	buttons[cardId]->EnableWindow(false);
+	//buttons[cardId]->EnableWindow(false);
+	buttons[cardId]->enableButton(false);
+
+	int newX = _cardPosX + 60;
+	int newY = _cardPosY - 120;
+	/*int newWidth = 50;
+	int newHeight = 100;*/
+
+	//buttons[cardId]->MoveWindow(newX, newY, newWidth, newHeight);
+	buttons[cardId]->moveButton(newX, newY);
 }

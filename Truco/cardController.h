@@ -6,12 +6,15 @@
 #include <string>
 #include <map>
 
+#include "customButton.h"
+
 class cardController
 {
 private:
 	//std::vector<std::shared_ptr<CString>> cards;
 	std::vector<CString> cards;
-	std::map<int, CButton*> buttons;
+	//std::map<int, CButton*> buttons;
+	std::map<int, customButton*> buttons;
 	CFrameWnd* _parent;
 
 	CString _playerName;
