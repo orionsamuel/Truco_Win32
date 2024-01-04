@@ -216,7 +216,9 @@
     <ResourceCompile Include="Truco.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="background.bmp" />
+    <Image Include="cards_resources\background.bmp" />
+    <Image Include="cards_resources\background_h.bmp" />
+    <Image Include="cards_resources\bitmap1.bmp" />
     <Image Include="res\MFCApplication4.ico" />
     <Image Include="res\MFCApplication4Doc.ico" />
   </ItemGroup>

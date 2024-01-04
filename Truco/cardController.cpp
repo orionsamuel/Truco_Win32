@@ -42,6 +42,23 @@ CRect cardController::createCard(int posX, int posY) const {
 	return CRect(left, top, right, bottom);
 }
 
+void cardController::enableCards(bool isEnable) const
+{
+	for (auto& card : cardButtons) {
+		card.second->enableButton(isEnable);
+
+		if (!isEnable)
+		{
+			card.second->ModifyStyle(0, BS_BITMAP);
+			card.second->SetBitmap(LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_CARD_BACKGROUND)));
+		}
+		else {
+			card.second->SetBitmap(NULL);
+			card.second->ModifyStyle(BS_BITMAP, 0);
+		}
+	}
+}
+
 void cardController::displayCard()
 {
 	//espadas = spades
@@ -82,7 +99,7 @@ void cardController::displayCard()
 
 		customButton* newButton = new customButton;
 		newButton->create(_isVertical, c, posX, posY, _parent, id);
-		buttons.insert(std::make_pair(id, newButton));
+		cardButtons.insert(std::make_pair(id, newButton));
 
 		if (_isVertical) {
 			posX += 60; //position X + card width + margin 10
@@ -101,15 +118,27 @@ int cardController::getBaseId()
 
 void cardController::selectCard(int cardId)
 {
-	//buttons[cardId]->ShowWindow(SW_HIDE);
-	//buttons[cardId]->EnableWindow(false);
-	buttons[cardId]->enableButton(false);
+	if (cardButtons[cardId]->getSelectedStatus()) {
+		cardButtons[cardId]->setSelectedStatus(false);
+		cardButtons[cardId]->reloadButtonPosition();
+		enableCards(true);
+	}
+	else {
+		//buttons[cardId]->ShowWindow(SW_HIDE);
+		//buttons[cardId]->EnableWindow(false);
+		enableCards(false);
+		cardButtons[cardId]->enableButton(true);
+		cardButtons[cardId]->setSelectedStatus(true);
 
-	int newX = _cardPosX + 60;
-	int newY = _cardPosY - 120;
-	/*int newWidth = 50;
-	int newHeight = 100;*/
+		cardButtons[cardId]->SetBitmap(NULL);
+		cardButtons[cardId]->ModifyStyle(BS_BITMAP, 0);
 
-	//buttons[cardId]->MoveWindow(newX, newY, newWidth, newHeight);
-	buttons[cardId]->moveButton(newX, newY);
+		int newX = _cardPosX + 60;
+		int newY = _cardPosY - 120;
+		/*int newWidth = 50;
+		int newHeight = 100;*/
+
+		//buttons[cardId]->MoveWindow(newX, newY, newWidth, newHeight);
+		cardButtons[cardId]->moveButton(newX, newY);
+	}
 }

@@ -1,12 +1,13 @@
 #pragma once
-#include "card.h"
-#include "cardView.h"
 #include <vector>
 #include <memory>
 #include <string>
 #include <map>
 
+#include "card.h"
+#include "cardView.h"
 #include "customButton.h"
+#include "resource.h"
 
 class cardController
 {
@@ -14,7 +15,7 @@ private:
 	//std::vector<std::shared_ptr<CString>> cards;
 	std::vector<CString> cards;
 	//std::map<int, CButton*> buttons;
-	std::map<int, customButton*> buttons;
+	std::map<int, customButton*> cardButtons;
 	CFrameWnd* _parent;
 
 	CString _playerName;
@@ -24,6 +25,7 @@ private:
 	int _baseId = 0;
 
 	CRect createCard(int posX, int posY) const;
+	void enableCards(bool isEnable = true) const;
 
 public:
 	cardController() = default;

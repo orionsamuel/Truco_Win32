@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Controllers">
       <UniqueIdentifier>{01e2d037-e728-4fc7-a4d5-e5816e6cc060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\cards_resources">
+      <UniqueIdentifier>{5254a7c8-80aa-4a2c-a1eb-98e0f7a02a9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,8 +120,14 @@
     <Image Include="res\MFCApplication4Doc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="background.bmp">
+    <Image Include="cards_resources\background.bmp">
+      <Filter>Resource Files\cards_resources</Filter>
+    </Image>
+    <Image Include="cards_resources\bitmap1.bmp">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="cards_resources\background_h.bmp">
+      <Filter>Resource Files\cards_resources</Filter>
     </Image>
   </ItemGroup>
 </Project>

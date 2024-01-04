@@ -1,5 +1,6 @@
 #pragma once
 #include "cardController.h"
+#include "resource.h"
 
 class CMyWnd : public CFrameWnd
 {

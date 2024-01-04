@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "CmyWnd.h"
-#include "cardController.h"
-#include "resource.h"
 
 int maxWidth = 1200;
 int maxHeight = 700;
@@ -29,10 +27,17 @@ CMyWnd::CMyWnd()
 
 	//botão com background
 	CButton* bmpButton1 = new CButton;
-	bmpButton1->Create(_T("Bitmap"), WS_CHILD | WS_VISIBLE | BS_BITMAP, CRect(100, 100, 200, 330), this, 3);
+	bmpButton1->Create(_T("Bitmap"), WS_CHILD | WS_VISIBLE | BS_BITMAP, CRect(100, 100, 150, 200), this, 3);
 
 	if (bmpButton1->GetBitmap() == NULL)
-		bmpButton1->SetBitmap(LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_BITMAP1)));
+		bmpButton1->SetBitmap(LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_CARD_BACKGROUND)));
+
+
+	CButton* bmpButton2 = new CButton;
+	bmpButton2->Create(_T("Bitmap2"), WS_CHILD | WS_VISIBLE | BS_BITMAP, CRect(300, 100, 400, 150), this, 3);
+
+	if (bmpButton2->GetBitmap() == NULL)
+		bmpButton2->SetBitmap(LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_CARD_BACKGROUND_H)));
 
 }
 

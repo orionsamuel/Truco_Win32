@@ -30,7 +30,7 @@ void customButton::create(bool isVertical, CString label, int positionX, int pos
 
 	// if vertical element, the size is 50x100, else is 100x50
 	_width = _isVertical ? _size50 : _size100;
-	_height = _isVertical ? _size100 : _size50 - 10;
+	_height = _isVertical ? _size100 : _size50;
 
 	//CButton::Create(label, WS_CHILD | WS_VISIBLE, createButtonRect(positionX, positionY), pParentWnd, nID);
 	this->Create(label, WS_CHILD | WS_VISIBLE, createButtonRect(positionX, positionY), pParentWnd, nID);
