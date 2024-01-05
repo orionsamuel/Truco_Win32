@@ -3,6 +3,7 @@
 #include "deckController.h"
 
 void deckController::addCard(cardController card)
+{
 	try {
         deckCards.baseCards.push_back(std::make_shared<card>(card.getCard()));
     } catch (const std::bad_alloc& e) {
