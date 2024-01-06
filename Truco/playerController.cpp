@@ -14,3 +14,7 @@ cardController playerController::dealCard()
 {
 	return deckSettings.popCard();
 }
+
+std::string playerController::getName() {
+	return p.name;
+}

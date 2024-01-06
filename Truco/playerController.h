@@ -11,7 +11,8 @@ public:
 
 	void createPlayer(std::string name);
 	void addCard(cardController card);
-	cardController dealCard();
+	cardController dealCard(); 
+	std::string getName();
 
 	deckController deckSettings;
 

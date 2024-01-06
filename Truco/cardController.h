@@ -17,6 +17,7 @@ public:
 	card getCard();
 	Suit getSuit();
 	Value getValue();
+	cardController generateCard();
 
 private:
 	card c;
