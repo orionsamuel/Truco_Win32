@@ -59,9 +59,9 @@ Value cardController::getValue()
 cardController cardController::generateCard() {
 	std::random_device dev;
 	std::mt19937 rng(dev());
-	std::uniform_int_distribution<std::mt19937::result_type> dist6(1, 10);
-	c.value = (Value)dist6(rng);
+	std::uniform_int_distribution<std::mt19937::result_type> value(1, 10);
+	c.value = (Value)value(rng);
 
-	std::uniform_int_distribution<std::mt19937::result_type> dist6(1, 4);
-	c.suit = (Suit)dist6(rng);
+	std::uniform_int_distribution<std::mt19937::result_type> suit(1, 4);
+	c.suit = (Suit)suit(rng);
 }

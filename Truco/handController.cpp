@@ -2,6 +2,7 @@
 #include "handController.h"
 #include <random>
 
+bool notDuplicatedCard(int, std::vector<cardController>);
 
 void handController::createShuffledDeck() {
 	int counter = 0;
