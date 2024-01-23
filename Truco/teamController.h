@@ -6,14 +6,15 @@
 
 class teamController
 {
-private:
-	std::vector<std::shared_ptr<team>> teamList;
 public:
+	std::vector<std::shared_ptr<team>> teamList;
+
 	int createTeam(std::string name);
+	std::string getTeamName(team teamName) const;
 	void addPlayers(std::string teamName, std::string name);
 	void addPlayers(std::string name);
 	void showPlayers();
-	void showScore();
+	int showScore();
 	void giveScoreToWinner(int score, playerController winner);
 	void distributeCards(deckController deckSettings);
 };

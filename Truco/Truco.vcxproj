@@ -191,7 +191,6 @@
     <ClCompile Include="cardController.cpp" />
     <ClCompile Include="cardView.cpp" />
     <ClCompile Include="CmyWnd.cpp" />
-    <ClCompile Include="deck.cpp" />
     <ClCompile Include="deckController.cpp" />
     <ClCompile Include="gameController.cpp" />
     <ClCompile Include="handController.cpp" />

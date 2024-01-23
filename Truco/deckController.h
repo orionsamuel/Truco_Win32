@@ -9,7 +9,7 @@ class deckController {
 public:
 	deckController() = default;
 
-	void addCard(cardController card);
+	void addCard(cardController newCard);
 	cardController popCard();
 
 private:

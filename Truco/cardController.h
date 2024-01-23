@@ -22,5 +22,6 @@ public:
 private:
 	card c;
 	cardView cv;
+	std::default_random_engine randomEngine;
 };
 

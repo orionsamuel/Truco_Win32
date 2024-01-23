@@ -4,6 +4,7 @@
 #include "game.h"
 #include "handController.h"
 #include "playerController.h"
+#include "team.h"
 #include "teamController.h"
 #include <filesystem>
 #include <memory>
@@ -12,7 +13,7 @@
 
 class gameController {
 public:
-    GameController() = default;
+    gameController() = default;
     void createGame();
     void loadPlayers(int quantity);
     void showScore();
@@ -22,6 +23,6 @@ public:
 
     game gameSettings;
     handController handSettings;
-    std::vector< std::shared_ptr <teamController>> teamSettings;
+    teamController teamSettings;
     std::vector<std::shared_ptr<playerController>> players;
 };

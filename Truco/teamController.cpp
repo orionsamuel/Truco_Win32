@@ -4,14 +4,18 @@
 
 int teamController::createTeam(std::string name) {
 	int result;
-	team newTeam;
-	newTeam.teamName = name;
-	newTeam.score = 0;
-	newTeam.teamId = 0; // Confirm the logic of this attribute
+	std::shared_ptr<team> newTeam = std::make_shared<team>();
+	newTeam->teamName = name;
+	newTeam->score = 0;
+	newTeam->teamId = 0; // Confirm the logic of this attribute
 	teamList.emplace_back(newTeam);
 	
-	result = newTeam.score; // Confirm what should be the output of it
+	result = newTeam->score; // Confirm what should be the output of it
 	return result;
+}
+
+std::string teamController::getTeamName(team teamName) const {
+	return teamName.teamName;
 }
 
 void teamController::addPlayers(std::string teamName, std::string name) {
@@ -37,7 +41,8 @@ void teamController::showPlayers() {
 
 }
 
-void teamController::showScore() {
+int teamController::showScore() {
+	return 0;
 }
 
 void teamController::giveScoreToWinner(int score, playerController winner) {
