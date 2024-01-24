@@ -4,7 +4,7 @@
 #include<iostream>
 
 
-cardController::cardController(card& c, cardView& cv) : c(c), cv(cv) {}
+cardController::cardController(card& c, cardView& cv) : c(c), cv(cv), randomEngine(std::random_device{}()) {}
 
 void cardController::createCard(Suit s, Value v)
 {
@@ -35,7 +35,7 @@ card cardController::getCard()
 Suit cardController::getSuit()
 {
 	try {
-		std::uniform_int_distribution<int> distribution(0, static_cast<int>(Suit::DIAMONDS));
+		std::uniform_int_distribution<int> distribution(1, static_cast<int>(Suit::DIAMONDS));
 		return static_cast<Suit>(distribution(randomEngine));
 	}
 	catch (const std::exception& e) {
@@ -47,7 +47,7 @@ Suit cardController::getSuit()
 Value cardController::getValue()
 {
 	try {
-		std::uniform_int_distribution<int> distribution(0, static_cast<int>(Value::KING));
+		std::uniform_int_distribution<int> distribution(1, static_cast<int>(Value::KING));
 		return static_cast<Value>(distribution(randomEngine));
 	}
 	catch (const std::exception& e) {
@@ -56,12 +56,12 @@ Value cardController::getValue()
 	}
 }
 
-cardController cardController::generateCard() {
-	std::random_device dev;
-	std::mt19937 rng(dev());
-	std::uniform_int_distribution<std::mt19937::result_type> value(1, 10);
-	c.value = (Value)value(rng);
+void cardController::generateCard() {
+	c.value = static_cast<Value>(getRandomNumber(1, static_cast<int>(Value::KING)));
+	c.suit = static_cast<Suit>(getRandomNumber(1, static_cast<int>(Suit::DIAMONDS)));
+}
 
-	std::uniform_int_distribution<std::mt19937::result_type> suit(1, 4);
-	c.suit = (Suit)suit(rng);
+int cardController::cardController::getRandomNumber(int min, int max) {
+	std::uniform_int_distribution<int> distribution(min, max);
+	return distribution(randomEngine);
 }

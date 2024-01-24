@@ -1,6 +1,7 @@
 #include<iostream>
 
 #include "deckController.h"
+#include "pch.h"
 
 void deckController::addCard(cardController newCard)
 {

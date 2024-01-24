@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "playerController.h"
 
 void playerController::createPlayer(std::string name)
