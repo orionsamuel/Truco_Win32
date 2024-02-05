@@ -59,7 +59,7 @@ void handController::createGame() {
 	createShuffledDeck();
 	setManilha();
 	distributeCards();
-	setStarterPlayer();
+	//setStarterPlayer(); //Who should choose the starter player? hand or game?
 	hand.setValue = 1;
 	createSet();
 }

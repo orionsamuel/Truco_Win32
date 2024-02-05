@@ -44,7 +44,7 @@ std::vector<std::shared_ptr<playerController>> teamController::showPlayers(int t
 			return team->members;
 		}
 	}
-	return;
+	return std::vector<std::shared_ptr<playerController>>();
 }
 
 std::shared_ptr<playerController> teamController::getPlayer(std::string playerName) {
@@ -56,7 +56,7 @@ std::shared_ptr<playerController> teamController::getPlayer(std::string playerNa
 			}
 		}
 	}
-	return;
+	return std::shared_ptr<playerController>();
 }
 
 int teamController::showScore(int teamId) {

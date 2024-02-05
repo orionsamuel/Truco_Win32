@@ -10,7 +10,7 @@ playerController setController::getCurrentPlayer() {
 }
 
 void setController::startSet() {
-
+	//What should we do with that?
 }
 
 void setController::playCard() {
