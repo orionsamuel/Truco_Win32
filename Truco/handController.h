@@ -1,4 +1,5 @@
 #pragma once
+#include "playerController.h"
 #include "teamController.h"
 #include "hand.h"
 #include "setController.h"
@@ -12,9 +13,9 @@ private:
 	void createShuffledDeck();
 	void distributeCards();
 	void setManilha();
-	void setStarterPlayer();
+	void setStarterPlayer(playerController player);
 	void createSet();
-	void setTrucoPlayer();
+	void setTrucoPlayer(playerController player);
 	void setSetValue();
 	void setTeamScore();
 public:

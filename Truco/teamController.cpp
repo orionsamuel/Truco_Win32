@@ -47,6 +47,18 @@ std::vector<std::shared_ptr<playerController>> teamController::showPlayers(int t
 	return;
 }
 
+std::shared_ptr<playerController> teamController::getPlayer(std::string playerName) {
+	for (auto& team : teamList)
+	{
+		for (auto& player : team->members) {
+			if (player->getName()._Equal(playerName)) {
+				return player;
+			}
+		}
+	}
+	return;
+}
+
 int teamController::showScore(int teamId) {
 	for (auto& team : teamList)
 	{
