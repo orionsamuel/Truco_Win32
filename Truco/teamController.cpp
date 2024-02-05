@@ -37,12 +37,24 @@ void teamController::addPlayers(std::string name) {
 	teamList[0]->members.push_back(std::make_shared<playerController>(playerSettings));
 }
 
-void teamController::showPlayers() {
-
+std::vector<std::shared_ptr<playerController>> teamController::showPlayers(int teamId) {
+	for (auto& team : teamList)
+	{
+		if (team->teamId == teamId) {
+			return team->members;
+		}
+	}
+	return;
 }
 
-int teamController::showScore() {
-	return 0;
+int teamController::showScore(int teamId) {
+	for (auto& team : teamList)
+	{
+		if (team->teamId == teamId) {
+			return team->score;
+		}
+	}
+	return -1;
 }
 
 void teamController::giveScoreToWinner(int score, playerController winner) {
