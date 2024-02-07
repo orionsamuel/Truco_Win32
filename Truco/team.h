@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <memory>
+#include "playerController.h"
 
 class team {
 public:

@@ -1,4 +1,5 @@
 #pragma once
+#include <afxwin.h>
 #include "card.h"
 
 class cardView

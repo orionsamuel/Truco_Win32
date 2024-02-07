@@ -17,10 +17,13 @@ public:
 	card getCard();
 	Suit getSuit();
 	Value getValue();
-	cardController generateCard();
+	void generateCard();
 
 private:
 	card c;
 	cardView cv;
+	std::mt19937 randomEngine;
+
+	int getRandomNumber(int min, int max);
 };
 

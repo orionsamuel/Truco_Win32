@@ -2,6 +2,7 @@
 #include "handController.h"
 #include <random>
 
+bool notDuplicatedCard(int, std::vector<cardController>);
 
 void handController::createShuffledDeck() {
 	int counter = 0;
@@ -25,8 +26,8 @@ void handController::setManilha() {
 	hand.manilha = deckSettings.popCard();
 }
 
-void handController::setStarterPlayer() {
-	// What should be the logic for setting this starter player?
+void handController::setStarterPlayer(playerController player) {
+	hand.startPlayer = player;
 }
 
 void handController::createSet() {
@@ -37,8 +38,8 @@ void handController::createSet() {
 	hand.setList.push_back(std::make_shared<setController>(setSettings));
 }
 
-void handController::setTrucoPlayer() {
-	// Shouldn't it be setTrucoTeam(int id)?
+void handController::setTrucoPlayer(playerController player) {
+	hand.trucoPlayer = player;
 }
 
 void handController::setSetValue() {
@@ -58,7 +59,7 @@ void handController::createGame() {
 	createShuffledDeck();
 	setManilha();
 	distributeCards();
-	setStarterPlayer();
+	//setStarterPlayer(); //Who should choose the starter player? hand or game?
 	hand.setValue = 1;
 	createSet();
 }

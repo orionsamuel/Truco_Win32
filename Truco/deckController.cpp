@@ -1,11 +1,12 @@
 #include<iostream>
 
 #include "deckController.h"
+#include "pch.h"
 
-void deckController::addCard(cardController card)
+void deckController::addCard(cardController newCard)
 {
 	try {
-        deckCards.baseCards.push_back(std::make_shared<card>(card.getCard()));
+        deckCards.baseCards.push_back(std::make_shared<card>(newCard.getCard()));
     } catch (const std::bad_alloc& e) {
         std::cerr << "Error adding card to deck: " << e.what() << std::endl;
     }

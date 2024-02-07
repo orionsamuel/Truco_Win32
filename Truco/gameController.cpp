@@ -31,8 +31,8 @@ void gameController::loadPlayers(int quantity)
 void gameController::showScore()
 {
     try {
-        for (int i = 0; i < teamSettings.size; i++) {
-            std::cout << "Team " << i + 1 << " score: " << teamSettings[i]->showScore() << std::endl;
+        for (size_t i = 0; i < teamSettings.teamList.size(); i++) {
+            std::cout << "Team " << i + 1 << " score: " << teamSettings.teamList[i]->score << std::endl;
         }
     }
     catch (const std::exception& e) {
@@ -43,18 +43,20 @@ void gameController::showScore()
 void gameController::showWinner()
 {
     try {
-        TeamController* winner = nullptr;
+        int winner = -1;
 
-        for (auto& team : teamSettings) {
-            int currentScore = team->showScore();
+        for (int i = 0; i < teamSettings.teamList.size(); ++i) {
+            int currentScore = teamSettings.teamList[i]->score;
 
             if (currentScore >= 12) {
-                winner = &team;
+                winner = i;
+                break;
             }
         }
 
-        if (winner != nullptr) {
-            std::cout << "Team " << winner->getTeamName() << " is the winner with a score of " << winner->getScore() << std::endl;
+        if (winner != -1) {
+            std::shared_ptr<team> winnerTeam = std::make_shared<team>(*teamSettings.teamList[winner]);
+            std::cout << "Team " << teamSettings.getTeamName(*winnerTeam) << " is the winner with a score of " << winnerTeam->score << std::endl;
         }
         else {
             std::cout << "No winner yet." << std::endl;
@@ -71,8 +73,8 @@ void gameController::saveGame(const std::string& filename)
         fs::path filePath = fs::current_path() / filename;
         std::ofstream file(filePath);
         if (file.is_open()) {
-            for (int i = 0; i < teamSettings.size(); ++i) {
-                file << "Team " << i + 1 << " Score: " << teamSettings[i]->getScore() << "\n";
+            for (int i = 0; i < teamSettings.teamList.size(); ++i) {
+                file << "Team " << i + 1 << " Score: " << teamSettings.teamList[i]->score << "\n";
             }
             file.close();
             std::cout << "Game state saved successfully.\n";
