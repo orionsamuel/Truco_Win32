@@ -188,9 +188,11 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="card.cpp" />
     <ClCompile Include="cardController.cpp" />
     <ClCompile Include="cardView.cpp" />
     <ClCompile Include="CmyWnd.cpp" />
+    <ClCompile Include="customButton.cpp" />
     <ClCompile Include="deckController.cpp" />
     <ClCompile Include="gameController.cpp" />
     <ClCompile Include="handController.cpp" />
@@ -204,6 +206,7 @@
     <ClInclude Include="cardController.h" />
     <ClInclude Include="cardView.h" />
     <ClInclude Include="CmyWnd.h" />
+    <ClInclude Include="customButton.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="deckController.h" />
     <ClInclude Include="framework.h" />

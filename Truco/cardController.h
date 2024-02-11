@@ -11,8 +11,9 @@ class cardController
 {
 public:
 	cardController() = default;
-	cardController(card& c, cardView& cv);
-	void createCard(Suit s, Value v);
+	cardController(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
+
+	void createCard(Suit suit, Value value);
 	void displayCard();
 	card getCard();
 	Suit getSuit();
@@ -20,8 +21,8 @@ public:
 	void generateCard();
 
 private:
-	card c;
-	cardView cv;
+	card _card;
+	cardView* _cardView;
 	std::mt19937 randomEngine;
 
 	int getRandomNumber(int min, int max);

@@ -3,14 +3,15 @@
 
 #include<iostream>
 
+cardController::cardController(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID) : randomEngine(std::random_device{}()) {
+	_cardView = new cardView(isVertical, positionX, positionY, pParentWnd, nID);
+}
 
-cardController::cardController(card& c, cardView& cv) : c(c), cv(cv), randomEngine(std::random_device{}()) {}
-
-void cardController::createCard(Suit s, Value v)
+void cardController::createCard(Suit suit, Value value)
 {
 	try {
-		c.suit = s;
-		c.value = v;
+		_card.setSuit(suit);
+		_card.setValue(value);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error creating card: " << e.what() << std::endl;
@@ -20,7 +21,7 @@ void cardController::createCard(Suit s, Value v)
 void cardController::displayCard()
 {
 	try {
-		cv.displayCard(c);
+		_cardView->displayCard(&_card);
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error displaying card: " << e.what() << std::endl;
@@ -29,7 +30,7 @@ void cardController::displayCard()
 
 card cardController::getCard()
 {
-	return c;
+	return _card;
 }
 
 Suit cardController::getSuit()
@@ -57,8 +58,8 @@ Value cardController::getValue()
 }
 
 void cardController::generateCard() {
-	c.value = static_cast<Value>(getRandomNumber(1, static_cast<int>(Value::KING)));
-	c.suit = static_cast<Suit>(getRandomNumber(1, static_cast<int>(Suit::DIAMONDS)));
+	_card.setValue(static_cast<Value>(getRandomNumber(1, static_cast<int>(Value::KING))));
+	_card.setSuit(static_cast<Suit>(getRandomNumber(1, static_cast<int>(Suit::DIAMONDS))));
 }
 
 int cardController::cardController::getRandomNumber(int min, int max) {

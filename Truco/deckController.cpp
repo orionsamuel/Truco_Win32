@@ -20,7 +20,7 @@ cardController deckController::popCard()
             deckCards.baseCards.pop_back();
 
             cardController cc;
-            cc.createCard(card->suit, card->value);
+            cc.createCard(card->getSuit(), card->getValue());
 
             return cc;
         }

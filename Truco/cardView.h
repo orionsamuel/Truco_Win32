@@ -1,18 +1,22 @@
 #pragma once
 #include <afxwin.h>
 #include "card.h"
+#include "customButton.h"
 
 class cardView
 {
-private:
-	CEdit* valueTextfield = new CEdit;
-	CEdit* suitTextfield = new CEdit;
-	CButton* button = new CButton;
-
-
 public:
 	cardView() = default;
-	explicit cardView(CFrameWnd* parent);
-	void displayCard(card c) const;
+	cardView(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
+	void displayCard(card* c) const;
+
+private:
+	bool _isVerticalCard;
+	int _positionX;
+	int _positionY;
+	CFrameWnd* _parentWindow;
+	UINT _cardId;
+
+	customButton* _card = new customButton();
 };
 

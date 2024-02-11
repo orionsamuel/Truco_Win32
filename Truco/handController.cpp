@@ -15,7 +15,7 @@ void handController::createShuffledDeck() {
 			deckSettings.addCard(cardSettings[counter]);
 			counter++;
 		}
-	}	
+	}
 }
 
 void handController::distributeCards() {
@@ -69,7 +69,7 @@ bool notDuplicatedCard(int index, std::vector<cardController> cardSettingsList) 
 	cardController newCard = cardSettingsList[index];
 	for (auto& cardSettings : cardSettingsList)
 	{
-		if (cardSettings.getCard().suit == newCard.getCard().suit && cardSettings.getCard().value == newCard.getCard().value) {
+		if (cardSettings.getCard().getSuit() == newCard.getCard().getSuit() && cardSettings.getCard().getValue() == newCard.getCard().getValue()) {
 			counter++;
 		}
 	}

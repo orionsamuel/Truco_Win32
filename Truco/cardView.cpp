@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "cardView.h"
 
-cardView::cardView(CFrameWnd* parent)
+cardView::cardView(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
 {
-	button->Create(_T("Clique"), WS_CHILD | WS_VISIBLE, CRect(10, 10, 100, 30), parent, 1);
-	suitTextfield->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(10, 40, 100, 60), parent, 1);
-	valueTextfield->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(10, 70, 100, 90), parent, 2);
+	_isVerticalCard = isVertical;
+	_positionX = positionX;
+	_positionY = positionY;
+	_parentWindow = pParentWnd;
+	_cardId = nID;
 }
-void cardView::displayCard(card c) const
+
+void cardView::displayCard(card* cardModel) const
 {
-	CString sWindowText;
-	CString sWindowText2;
-	valueTextfield->GetWindowText(sWindowText);
-	suitTextfield->GetWindowText(sWindowText2);
-	AfxMessageBox(_T("Carta selecionada: " + sWindowText + " " + sWindowText2));
+	CString cardText = CString(cardModel->getCardDescription().c_str());
+	_card->create(_isVerticalCard, cardText, _positionX, _positionY, _parentWindow, _cardId);
 }
