@@ -6,11 +6,7 @@
 
 class deck {
 public:
-    deck();
-    void displaydeck() const;
-    std::shared_ptr<card> dealcard();
-    void shuffle();
+    deck() = default;
 
-private:
-    std::vector<std::shared_ptr<card>> cards;
+    std::vector<std::shared_ptr<card>> baseCards;
 };

@@ -66,6 +66,15 @@
     <ClCompile Include="cardView.cpp">
       <Filter>Source Files\Views</Filter>
     </ClCompile>
+    <ClCompile Include="handController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="setController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="teamController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
     <ClCompile Include="customButton.cpp">
       <Filter>Source Files\Controllers</Filter>
     </ClCompile>
@@ -103,6 +112,24 @@
     </ClInclude>
     <ClInclude Include="cardView.h">
       <Filter>Header Files\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="hand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="team.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="teamController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="handController.h">
+      <Filter>Header Files\Controllers</Filter>
     </ClInclude>
     <ClInclude Include="customButton.h">
       <Filter>Header Files\Controllers</Filter>
