@@ -1,5 +1,6 @@
 #include "cardController.h"
 #include "pch.h"
+#include <iostream>
 
 cardController::cardController(CFrameWnd* parent, std::string playerName, int baseId, int posX, int posY, bool isVertical)
 {
@@ -60,7 +61,7 @@ void cardController::enableCards(bool isEnable) const
 }
 
 
-cardController::cardController(card& c, cardView& cv) : c(c), cv(cv), randomEngine(std::random_device{}()) {}
+//cardController::cardController(card& c, cardView& cv) : c(c), cv(cv), randomEngine(std::random_device{}()) {}
 
 void cardController::createCard(Suit s, Value v)
 {
@@ -73,15 +74,15 @@ void cardController::createCard(Suit s, Value v)
 	}
 }
 
-void cardController::displayCard()
-{
-	try {
-		cv.displayCard(c);
-	}
-	catch (const std::exception& e) {
-		std::cerr << "Error displaying card: " << e.what() << std::endl;
-	}
-}
+//void cardController::displayCard()
+//{
+//	try {
+//		cv.displayCard(c);
+//	}
+//	catch (const std::exception& e) {
+//		std::cerr << "Error displaying card: " << e.what() << std::endl;
+//	}
+//}
 
 card cardController::getCard()
 {
@@ -121,6 +122,9 @@ int cardController::cardController::getRandomNumber(int min, int max) {
 	std::uniform_int_distribution<int> distribution(min, max);
 	return distribution(randomEngine);
 }
+
+void cardController::displayCard()
+{
 	//espadas = spades
 	//copas = heart
 	//paus = clubs

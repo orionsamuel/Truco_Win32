@@ -31,6 +31,10 @@ private:
 
 	CRect createCard(int posX, int posY) const;
 	void enableCards(bool isEnable = true) const;
+	card c;
+	cardView cv;
+	std::mt19937 randomEngine;
+	int getRandomNumber(int min, int max);
 
 public:
 	cardController() = default;
@@ -43,15 +47,7 @@ public:
 	Suit getSuit();
 	Value getValue();
 	void generateCard();
-
-private:
-	card c;
-	cardView cv;
-	std::mt19937 randomEngine;
-
-	int getRandomNumber(int min, int max);
-
-	int getBaseId();
 	void selectCard(int cardId);
+	int getBaseId();
 };
 
