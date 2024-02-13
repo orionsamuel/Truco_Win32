@@ -1,77 +1,92 @@
 #include "pch.h"
 #include "handController.h"
-#include <random>
 
-bool notDuplicatedCard(int, std::vector<cardController>);
+handController::handController(CFrameWnd* pParentWnd, UINT nID)
+{
+	_parentWindow = pParentWnd;
+	_handId = nID;
+}
+
+void handController::createGame(teamController* teamList) {
+	_teamSettings = teamList;
+
+	createShuffledDeck();
+	distributeCards();
+	setManilha();
+	//setStarterPlayer(); //Who should choose the starter player? hand or game?
+	_hand.setValue = 1;
+	//createSet();
+}
+
+void handController::displayHand()
+{
+	/*_hand.lastMountCard.displayCard();
+	_hand.lastMountCard.enableCard(false);*/
+
+	_handView.displayView(_hand, _parentWindow, _handId);
+
+	_teamSettings->showAllPlayers();
+}
 
 void handController::createShuffledDeck() {
 	int counter = 0;
 	const int max_cards = 13;
 
-	std::vector<cardController> cardSettings(max_cards);
+	cardController cardSettings;
 	while (counter < max_cards) {
-		cardSettings[counter].generateCard();
-		if (notDuplicatedCard(counter, cardSettings)) {
-			deckSettings.addCard(cardSettings[counter]);
+		cardSettings.generateCard();
+		if (_deckSettings.canAddCard(cardSettings)) {
+			_deckSettings.addCard(cardSettings);
 			counter++;
 		}
 	}
 }
 
 void handController::distributeCards() {
-	teamSettings.distributeCards(deckSettings);
+	_teamSettings->distributeCards(&_deckSettings);
 }
 
 void handController::setManilha() {
-	hand.manilha = deckSettings.popCard();
+
+	int width = 90;
+	int posX = 1350 / 2 - width / 2;
+
+	_hand.lastMountCard = cardController(posX, 160, _parentWindow, _handId);
+
+	cardController lastCard = _deckSettings.popCard();
+	_hand.lastMountCard.createCard(lastCard.getSuit(), lastCard.getValue());
+
+	int manilhaId = static_cast<int>(lastCard.getValue());
+	manilhaId++;
+	manilhaId = manilhaId > static_cast<int>(Value::KING) ? 0 : manilhaId;
+	_hand.manilha.createCard(Suit::SPADES, static_cast<Value>(manilhaId));
 }
 
 void handController::setStarterPlayer(playerController player) {
-	hand.startPlayer = player;
+	_hand.startPlayer = player;
 }
 
 void handController::createSet() {
 	setController setSettings;
 
-	setSettings.setCurrentPlayer(hand.startPlayer);
+	setSettings.setCurrentPlayer(_hand.startPlayer);
 
-	hand.setList.push_back(std::make_shared<setController>(setSettings));
+	_hand.setList.push_back(std::make_shared<setController>(setSettings));
 }
 
 void handController::setTrucoPlayer(playerController player) {
-	hand.trucoPlayer = player;
+	_hand.trucoPlayer = player;
 }
 
 void handController::setSetValue() {
-	if (hand.setValue > 1 || hand.setValue < 12) {
-		hand.setValue += 3;
+	if (_hand.setValue > 1 || _hand.setValue < 12) {
+		_hand.setValue += 3;
 	}
-	else if (hand.setValue == 1) {
-		hand.setValue = 3;
+	else if (_hand.setValue == 1) {
+		_hand.setValue = 3;
 	}
 }
 
 void handController::setTeamScore() {
-	teamSettings.giveScoreToWinner(hand.setValue, hand.winner);
-}
-
-void handController::createGame() {
-	createShuffledDeck();
-	setManilha();
-	distributeCards();
-	//setStarterPlayer(); //Who should choose the starter player? hand or game?
-	hand.setValue = 1;
-	createSet();
-}
-
-bool notDuplicatedCard(int index, std::vector<cardController> cardSettingsList) {
-	int counter = 0;
-	cardController newCard = cardSettingsList[index];
-	for (auto& cardSettings : cardSettingsList)
-	{
-		if (cardSettings.getCard().getSuit() == newCard.getCard().getSuit() && cardSettings.getCard().getValue() == newCard.getCard().getValue()) {
-			counter++;
-		}
-	}
-	return counter < 2;
+	_teamSettings->giveScoreToWinner(_hand.setValue, _hand.winner);
 }

@@ -4,18 +4,21 @@
 #include "cardController.h"
 #include "deckController.h"
 #include "player.h"
+#include "playerView.h"
 
 class playerController {
 public:
 	playerController() = default;
+	playerController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
 
-	void createPlayer(std::string name);
+	void createPlayer(std::string name, bool isCpu = false);
 	void addCard(cardController card);
 	cardController dealCard(); 
 	std::string getName();
-
-	deckController deckSettings;
+	void displayPlayer() const;
 
 private:
-	player p;
+	deckController _deckSettings;
+	player _player;
+	playerView _playerView;
 };

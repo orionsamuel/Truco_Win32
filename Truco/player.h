@@ -1,14 +1,12 @@
 #pragma once
-#include "card.h"
-#include "deck.h"
-#include <vector>
-#include <memory>
 #include <string>
+#include "enums.h"
 
 class player {
 public:
-    player() = default;
-
     std::string name;
-    deck cardList;
+    PlayerType type;
+
+    player() = default;
+    void setPlayerType(bool isCpu);
 };

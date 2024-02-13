@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "cardView.h"
 
-cardView::cardView(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
+cardView::cardView(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
 {
-	_isVerticalCard = isVertical;
 	_positionX = positionX;
 	_positionY = positionY;
 	_parentWindow = pParentWnd;
@@ -13,5 +12,10 @@ cardView::cardView(bool isVertical, int positionX, int positionY, CFrameWnd* pPa
 void cardView::displayCard(card* cardModel) const
 {
 	CString cardText = CString(cardModel->getCardDescription().c_str());
-	_card->create(_isVerticalCard, cardText, _positionX, _positionY, _parentWindow, _cardId);
+	_card->create(cardText, _positionX, _positionY, _parentWindow, _cardId);
+}
+
+void cardView::enableCard(bool isEnabled) const
+{
+	_card->enableButton(isEnabled);
 }

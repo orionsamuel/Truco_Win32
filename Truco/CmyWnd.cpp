@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CmyWnd.h"
 
-int maxWidth = 1200;
+int maxWidth = 1350;
 int maxHeight = 700;
 
 CMyWnd::CMyWnd()
@@ -10,8 +10,10 @@ CMyWnd::CMyWnd()
 
 	createTitle(this);
 
-	_startButton->create(false, _T("Play Game"), 550, 320, this, 1);
+	_startButton->create(_T("Play Game"), maxWidth/2 - 75, 320, this, 1);
 	//_startButton->Create(_T("Play Game"), WS_CHILD | WS_VISIBLE, CRect(550, 320, 650, 350), this, 1);
+
+	_gameControl = gameController(this, 10);
 }
 
 
@@ -37,7 +39,7 @@ void CMyWnd::createTitle(CFrameWnd* parent) {
 
 	int width = 300;
 	int height = 60;
-	int left = 450;
+	int left = maxWidth/2 - 150;
 	int top = 250;
 	_titleLabel->Create(title, WS_CHILD | WS_VISIBLE, CRect(left, top, left + width, top + height), parent, 1);
 }
@@ -72,4 +74,6 @@ void CMyWnd::OnButtonClick()
 
 	_titleLabel->DestroyWindow();
 	_startButton->DestroyWindow();
+
+	_gameControl.createGame(2);
 }

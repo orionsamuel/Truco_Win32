@@ -7,11 +7,11 @@ class cardView
 {
 public:
 	cardView() = default;
-	cardView(bool isVertical, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
+	cardView(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
 	void displayCard(card* c) const;
+	void enableCard(bool isEnabled = true) const;
 
 private:
-	bool _isVerticalCard;
 	int _positionX;
 	int _positionY;
 	CFrameWnd* _parentWindow;

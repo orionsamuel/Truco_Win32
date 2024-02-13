@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "customButton.h"
 
-customButton::customButton()
+customButton::customButton(int width, int height)
 {
+	_isCustomSize = true;
+	_width = width;
+	_height = height;
 }
 
 customButton::~customButton()
@@ -19,21 +22,15 @@ void customButton::setSelectedStatus(bool isSelected)
 	_isSelected = isSelected;
 }
 
-void customButton::create(bool isVertical, CString label, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
+void customButton::create(CString label, int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
 {
-	_isVertical = isVertical;
 	_label = label;
 	_buttonId = nID;
 
 	_initialPositionX = positionX;
 	_initialPositionY = positionY;
 
-	// if vertical element, the size is 50x100, else is 100x50
-	_width = _isVertical ? _size50 : _size100;
-	_height = _isVertical ? _size100 : _size50;
-
-	//CButton::Create(label, WS_CHILD | WS_VISIBLE, createButtonRect(positionX, positionY), pParentWnd, nID);
-	this->Create(label, WS_CHILD | WS_VISIBLE, createButtonRect(positionX, positionY), pParentWnd, nID);
+	this->Create(label, WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_CENTER, createButtonRect(positionX, positionY), pParentWnd, nID);
 }
 
 void customButton::enableButton(bool isEnabled)

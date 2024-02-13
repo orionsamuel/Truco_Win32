@@ -4,6 +4,7 @@
 #define stringify( name ) #name
 
 #include "enums.h"
+#include "converters.h"
 
 class card {
 public:
