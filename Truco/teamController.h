@@ -8,10 +8,12 @@ class teamController
 {
 public:
 	void createTeam(std::string name);
+
 	std::string getTeamName(int teamId) const;
 	void addPlayers(int teamId, playerController playerSettings);
 	void showAllPlayers();
 	void showTeamPlayers(int teamId);
+	std::vector<std::shared_ptr<playerController>> getTeamPlayers(int teamId);
 	std::shared_ptr<playerController> getPlayer(std::string playerName);
 	int getTeamListCount();
 	int showScore(int teamId);

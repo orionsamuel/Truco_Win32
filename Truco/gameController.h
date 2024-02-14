@@ -21,6 +21,8 @@ public:
 	void showScore();
 	void showWinner();
 
+	void executeAction(WPARAM wParam);
+
 private:
 	CFrameWnd* _parentWindow;
 	UINT _gameBaseId;

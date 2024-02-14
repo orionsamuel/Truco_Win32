@@ -13,19 +13,28 @@ void handController::createGame(teamController* teamList) {
 	createShuffledDeck();
 	distributeCards();
 	setManilha();
-	//setStarterPlayer(); //Who should choose the starter player? hand or game?
+
+	setCurrentPlayer();
+
 	_hand.setValue = 1;
-	//createSet();
 }
 
 void handController::displayHand()
 {
-	/*_hand.lastMountCard.displayCard();
-	_hand.lastMountCard.enableCard(false);*/
-
 	_handView.displayView(_hand, _parentWindow, _handId);
 
 	_teamSettings->showAllPlayers();
+	createSet();
+}
+
+void handController::executeHandAction(WPARAM wParam)
+{
+	auto currentSet = _hand.setList.back();
+	currentSet->executeSetAction(wParam);
+
+	setCurrentPlayer();
+	currentSet->setCurrentPlayer(_hand.startPlayer);
+	currentSet->startSet();
 }
 
 void handController::createShuffledDeck() {
@@ -71,6 +80,7 @@ void handController::createSet() {
 
 	setSettings.setCurrentPlayer(_hand.startPlayer);
 
+	setSettings.startSet();
 	_hand.setList.push_back(std::make_shared<setController>(setSettings));
 }
 
@@ -89,4 +99,22 @@ void handController::setSetValue() {
 
 void handController::setTeamScore() {
 	_teamSettings->giveScoreToWinner(_hand.setValue, _hand.winner);
+}
+
+void handController::setCurrentPlayer()
+{
+	int currIndex = 0;
+	for (auto& player : _teamSettings->getTeamPlayers(_teamIndex)) {
+		if (currIndex == _playerIndex)
+		{
+			if (_teamIndex == 1)
+				_playerIndex = _playerIndex == 0 ? 1 : 0;
+
+			setStarterPlayer(*player);
+			break;
+		}
+		currIndex++;
+	}
+
+	_teamIndex = _teamIndex == 0 ? 1 : 0;
 }

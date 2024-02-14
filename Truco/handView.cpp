@@ -6,7 +6,7 @@ void handView::displayView(hand handModel, CFrameWnd* pParentWnd, UINT nID)
 	handModel.lastMountCard.displayCard();
 	handModel.lastMountCard.enableCard(false);
 
-	std::string manilha = "The manilha's card is: " + converters::convertValueToString(handModel.manilha.getValue());
+	std::string manilha = "The manilha card is: " + converters::convertValueToString(handModel.manilha.getValue());
 
 	CString manilhaValue = CString(manilha.c_str());
 

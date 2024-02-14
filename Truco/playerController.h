@@ -8,14 +8,18 @@
 
 class playerController {
 public:
+	UINT playerId;
+
 	playerController() = default;
 	playerController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
 
 	void createPlayer(std::string name, bool isCpu = false);
 	void addCard(cardController card);
+	void changeCardSelection(int cardId);
 	cardController dealCard(); 
 	std::string getName();
 	void displayPlayer() const;
+	void enableToSelectCard() const;
 
 private:
 	deckController _deckSettings;

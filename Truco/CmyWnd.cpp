@@ -50,6 +50,7 @@ void CMyWnd::createTitle(CFrameWnd* parent) {
 /// <param name="wParam">Id do botão clicado</param>
 void CMyWnd::ExecuteActionById(WPARAM wParam)
 {
+	_gameControl.executeAction(wParam);
 	/*if (wParam >= player4.getBaseId()) {
 		player4.selectCard(wParam);
 	}

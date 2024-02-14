@@ -12,5 +12,7 @@ public:
 	playerController getCurrentPlayer();
 	void startSet();
 	void playCard();
+
+	void executeSetAction(WPARAM wParam);
 };
 

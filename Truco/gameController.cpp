@@ -108,6 +108,14 @@ void gameController::showWinner()
 	}
 }
 
+void gameController::executeAction(WPARAM wParam)
+{
+	if (wParam >= _gameBaseId + 10) {
+		//Players actions
+		_handSettings.executeHandAction(wParam);
+	}
+}
+
 void gameController::loadPlayers(int quantity)
 {
 	try {

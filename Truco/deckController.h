@@ -1,5 +1,6 @@
 #pragma once
 #include<memory>
+#include<iostream>
 
 #include "cardController.h"
 #include "deck.h"
@@ -14,6 +15,9 @@ public:
 	bool canAddCard(cardController newCard);
 	void addCard(cardController newCard);
 	cardController popCard();
+
+	void changeCardSelection(int cardId);
+	void enableToSelectCard() const;
 
 private:
 	int _positionX;

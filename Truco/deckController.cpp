@@ -1,5 +1,3 @@
-#include<iostream>
-
 #include "deckController.h"
 #include "pch.h"
 
@@ -63,4 +61,14 @@ cardController deckController::popCard()
 		std::cerr << "Error popping card from deck: " << e.what() << std::endl;
 		return cardController();
 	}
+}
+
+void deckController::changeCardSelection(int cardId)
+{
+	_deckView->changeCardSelection(cardId);
+}
+
+void deckController::enableToSelectCard() const
+{
+	_deckView->enableToSelectCard();
 }

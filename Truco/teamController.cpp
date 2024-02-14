@@ -41,6 +41,18 @@ void teamController::showTeamPlayers(int teamId) {
 	}
 }
 
+std::vector<std::shared_ptr<playerController>> teamController::getTeamPlayers(int teamId)
+{
+	std::vector<std::shared_ptr<playerController>> playersList;
+	if (teamList.size() > teamId) {
+		for (auto& player : teamList[teamId]->members) {
+			playersList.push_back(player);
+		}
+	}
+
+	return playersList;
+}
+
 std::shared_ptr<playerController> teamController::getPlayer(std::string playerName) {
 	for (auto& team : teamList)
 	{

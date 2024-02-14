@@ -3,6 +3,8 @@
 
 playerController::playerController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
 {
+	playerId = nID;
+
 	_deckSettings = deckController(positionX, positionY + 50, pParentWnd, nID);
 	_playerView = playerView(positionX, positionY, pParentWnd, nID);
 }
@@ -18,6 +20,11 @@ void playerController::addCard(cardController card)
 	_deckSettings.addCard(card);
 }
 
+void playerController::changeCardSelection(int cardId)
+{
+	_deckSettings.changeCardSelection(cardId);
+}
+
 cardController playerController::dealCard()
 {
 	return _deckSettings.popCard();
@@ -31,4 +38,9 @@ void playerController::displayPlayer() const
 {
 	_playerView.displayPlayerName(_player);
 	_deckSettings.displayDeck();
+}
+
+void playerController::enableToSelectCard() const
+{
+	_deckSettings.enableToSelectCard();
 }
