@@ -19,6 +19,28 @@ void handController::createGame(teamController* teamList) {
 	_hand.setValue = 1;
 }
 
+void handController::loadNewSet()
+{
+	_deckSettings.clear();
+
+	for (auto& player : _teamSettings->getTeamPlayers(0)) {
+		player->clearDeck();
+	}
+	for (auto& player : _teamSettings->getTeamPlayers(1)) {
+		player->clearDeck();
+	}
+
+	createShuffledDeck();
+	distributeCards();
+	setManilha();
+
+	setCurrentPlayer();
+
+	_hand.setValue = 1;
+
+	displayHand();
+}
+
 void handController::displayHand()
 {
 	_handView.displayView(_hand, _parentWindow, _handId);
@@ -32,9 +54,21 @@ void handController::executeHandAction(WPARAM wParam)
 	auto currentSet = _hand.setList.back();
 	currentSet->executeSetAction(wParam);
 
+	if (currentSet->setIsFinished()) {
+		for (auto& player : _teamSettings->getTeamPlayers(0)) {
+			player->removedSelectedCard();
+		}
+		for (auto& player : _teamSettings->getTeamPlayers(1)) {
+			player->removedSelectedCard();
+		}
+
+		currentSet->reloadSetMoves();
+	}
+
 	setCurrentPlayer();
 	currentSet->setCurrentPlayer(_hand.startPlayer);
 	currentSet->startSet();
+
 }
 
 void handController::createShuffledDeck() {

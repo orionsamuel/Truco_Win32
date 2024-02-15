@@ -20,21 +20,17 @@ void playerController::addCard(cardController card)
 	_deckSettings.addCard(card);
 }
 
-void playerController::changeCardSelection(int cardId)
+cardController playerController::dealCard(int cardId)
 {
 	_deckSettings.changeCardSelection(cardId);
-}
-
-cardController playerController::dealCard()
-{
-	return _deckSettings.popCard();
+	return _deckSettings.removeCard(cardId);
 }
 
 std::string playerController::getName() {
 	return _player.name;
 }
 
-void playerController::displayPlayer() const
+void playerController::displayPlayer()
 {
 	_playerView.displayPlayerName(_player);
 	_deckSettings.displayDeck();
@@ -43,4 +39,14 @@ void playerController::displayPlayer() const
 void playerController::enableToSelectCard() const
 {
 	_deckSettings.enableToSelectCard();
+}
+
+void playerController::clearDeck()
+{
+	_deckSettings.clear();
+}
+
+void playerController::removedSelectedCard() const
+{
+	_deckSettings.removeSelectedCards();
 }

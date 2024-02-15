@@ -36,5 +36,6 @@ private:
 	void setSetValue();
 	void setTeamScore();
 	void setCurrentPlayer();
+	void loadNewSet();
 };
 

@@ -24,12 +24,24 @@ void cardView::enableCard(bool isEnabled) const
 	_card->enableButton(isEnabled);
 }
 
+void cardView::collapseCard() const
+{
+	_card->collapseButton();
+}
+
 void cardView::selectCard() const
 {
+	_card->setSelectedStatus(true);
 	_card->moveButton(_selectedPosX, _selectedPosY);
 }
 
 void cardView::deselectCard() const
 {
+	_card->setSelectedStatus(false);
 	_card->reloadButtonPosition();
+}
+
+bool cardView::hasCardSelected() const
+{
+	return _card->getSelectedStatus();
 }

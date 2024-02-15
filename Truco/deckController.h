@@ -11,13 +11,17 @@ public:
 	deckController() = default;
 	deckController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
 
-	void displayDeck() const;
+	void displayDeck();
 	bool canAddCard(cardController newCard);
 	void addCard(cardController newCard);
 	cardController popCard();
+	cardController removeCard(WPARAM wParam);
 
+
+	void removeSelectedCards() const;
 	void changeCardSelection(int cardId);
 	void enableToSelectCard() const;
+	void clear();
 
 private:
 	int _positionX;
@@ -27,4 +31,7 @@ private:
 
 	deck _deckCards;
 	deckView* _deckView;
+	std::vector<std::shared_ptr<cardController>> _cardList;
+	
+	void popCard(cardController currCard);
 };

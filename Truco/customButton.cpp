@@ -40,7 +40,7 @@ void customButton::enableButton(bool isEnabled)
 
 void customButton::collapseButton()
 {
-	this->DestroyWindow();
+	this->ShowWindow(SW_HIDE);
 }
 
 void customButton::moveButton(int newPositionX, int newPositionY)

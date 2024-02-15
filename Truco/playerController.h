@@ -15,11 +15,12 @@ public:
 
 	void createPlayer(std::string name, bool isCpu = false);
 	void addCard(cardController card);
-	void changeCardSelection(int cardId);
-	cardController dealCard(); 
+	cardController dealCard(int cardId);
 	std::string getName();
-	void displayPlayer() const;
+	void displayPlayer();
 	void enableToSelectCard() const;
+	void clearDeck();
+	void removedSelectedCard() const;
 
 private:
 	deckController _deckSettings;

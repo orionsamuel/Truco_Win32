@@ -70,16 +70,24 @@ void cardController::enableCard(bool isEnabled) const
 
 bool cardController::changeCardSelection()
 {
-	if (!_isSelected)
+	if (!hasCardSelected())
 	{
 		_cardView->selectCard();
-		_isSelected = true;
 	}
 	else
 	{
 		_cardView->deselectCard();
-		_isSelected = false;
 	}
 
-	return _isSelected;
+	return hasCardSelected();
+}
+
+bool cardController::hasCardSelected() const
+{
+	return _cardView->hasCardSelected();
+}
+
+void cardController::collapseCard() const
+{
+	_cardView->collapseCard();
 }

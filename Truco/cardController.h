@@ -24,12 +24,12 @@ public:
 	void generateCard();
 	void enableCard(bool isEnabled = true) const;
 	bool changeCardSelection();
+	bool hasCardSelected() const;
+	void collapseCard() const;
 
 private:
 	card _card;
 	cardView* _cardView;
 	std::mt19937 randomEngine;
-
-	bool _isSelected;
 };
 

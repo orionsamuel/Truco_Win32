@@ -13,18 +13,25 @@ void setController::startSet() {
 	currentPlayer.enableToSelectCard();
 }
 
-void setController::playCard() {
-	deckSettings.addCard(currentPlayer.dealCard());
+void setController::reloadSetMoves()
+{
+	_remainingMoves = 4;
+}
+
+void setController::playCard(WPARAM wParam) {
+	deckSettings.addCard(currentPlayer.dealCard(wParam));
+}
+
+bool setController::setIsFinished() const
+{
+	return _remainingMoves <= 0;
 }
 
 void setController::executeSetAction(WPARAM wParam)
 {
-	bool actionExecuted = false;
-
 	int diff = wParam - currentPlayer.playerId;
 	if (diff >= 0 && diff < 10) {
-
-		currentPlayer.changeCardSelection(wParam);
-		actionExecuted = true;
+		playCard(wParam);
+		_remainingMoves--;
 	}
 }

@@ -9,7 +9,7 @@ deckView::deckView(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID
 	_deckId = nID;
 }
 
-void deckView::displayDeck(deck deckCards)
+std::vector<std::shared_ptr<cardController>> deckView::displayDeck(deck deckCards)
 {
 	try {
 		if (!deckCards.baseCards.empty()) {
@@ -31,6 +31,7 @@ void deckView::displayDeck(deck deckCards)
 				posX += 95;
 				cardId++;
 			}
+			return _cardList;
 		}
 		else {
 			throw std::out_of_range("Deck is empty");
@@ -38,6 +39,7 @@ void deckView::displayDeck(deck deckCards)
 	}
 	catch (const std::out_of_range& e) {
 		std::cerr << "Error to display deck: " << e.what() << std::endl;
+		return std::vector<std::shared_ptr<cardController>>();
 	}
 }
 
@@ -59,5 +61,14 @@ void deckView::changeCardSelection(int cardId)
 void deckView::enableToSelectCard() const {
 	for (auto& card : _cardList) {
 		card->enableCard(true);
+	}
+}
+
+void deckView::removeSelectedCards() const
+{
+	for (auto& card : _cardList) {
+		if (card->hasCardSelected()) {
+			card->collapseCard();
+		}
 	}
 }
