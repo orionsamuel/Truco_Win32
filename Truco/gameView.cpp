@@ -10,6 +10,31 @@ void gameView::displayTeamScore(std::string scoreText, CFrameWnd* pParentWnd, UI
 
 	CString teamScore = CString(scoreText.c_str());
 
-	CStatic* label = new CStatic{};
-	label->Create(teamScore, WS_CHILD | WS_VISIBLE, CRect(posX, posY, width, height), pParentWnd, nID);
+	_scoreLabel = new CStatic{};
+	_scoreLabel->Create(teamScore, WS_CHILD | WS_VISIBLE, CRect(posX, posY, width, height), pParentWnd, nID);
+}
+
+void gameView::updateTeamScore(std::string scoreText)
+{
+	CString teamScore = CString(scoreText.c_str());
+	_scoreLabel->SetWindowTextW(teamScore);
+}
+
+void gameView::displaySetScore(std::string scoreText, CFrameWnd* pParentWnd, UINT nID)
+{
+	int posX = 30;
+	int posY = 130;
+	int width = 200;
+	int height = 200;
+
+	CString teamScore = CString(scoreText.c_str());
+
+	_setScoreLabel = new CStatic{};
+	_setScoreLabel->Create(teamScore, WS_CHILD | WS_VISIBLE, CRect(posX, posY, width, height), pParentWnd, nID);
+}
+
+void gameView::updateSetScore(std::string scoreText)
+{
+	CString teamScore = CString(scoreText.c_str());
+	_setScoreLabel->SetWindowTextW(teamScore);
 }

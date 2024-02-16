@@ -35,4 +35,5 @@ private:
 	void loadPlayers(int quantity);
 	void drawGame();
 	std::string getScoreData();
+	std::string getSetScoreData();
 };

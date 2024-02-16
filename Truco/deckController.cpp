@@ -50,6 +50,7 @@ cardController deckController::removeCard(WPARAM wParam) {
 			for (auto& card : _cardList) {
 				if (card->cardId == wParam) {
 					cardController newCard(_positionX, _positionY, _parentWindow, card->cardId);
+					newCard.createCard(card->getSuit(), card->getValue());
 
 					remove(_cardList.begin(), _cardList.end(), card);
 
@@ -126,5 +127,5 @@ void deckController::clear()
 	_deckCards.baseCards.clear();
 	_cardList.clear();
 
-	_deckView->~deckView();
+	_deckView->clearView();
 }

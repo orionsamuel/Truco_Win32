@@ -12,8 +12,10 @@ public:
 	handController(CFrameWnd* pParentWnd, UINT nID);
 
 	void createGame(teamController* teamList);
+	void loadNewSet();
 	void displayHand();
 	void executeHandAction(WPARAM wParam);
+	bool hasHandFinished();
 
 private:
 	CFrameWnd* _parentWindow;
@@ -26,6 +28,7 @@ private:
 
 	int _teamIndex = 0;
 	int _playerIndex = 0;
+	int _remainingSets = 3;
 
 	void createShuffledDeck();
 	void distributeCards();
@@ -34,8 +37,8 @@ private:
 	void createSet();
 	void setTrucoPlayer(playerController player);
 	void setSetValue();
+	void setTeamSetScore();
 	void setTeamScore();
 	void setCurrentPlayer();
-	void loadNewSet();
 };
 

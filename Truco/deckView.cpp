@@ -72,3 +72,12 @@ void deckView::removeSelectedCards() const
 		}
 	}
 }
+
+void deckView::clearView()
+{
+	for (auto& card : _cardList) {
+		card->collapseCard();
+	}
+
+	_cardList.clear();
+}

@@ -8,13 +8,13 @@ class deckView
 {
 public:
 	deckView() = default;
-	~deckView() = default;
 
 	deckView(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
 	std::vector<std::shared_ptr<cardController>> displayDeck(deck deckCards);
 	void changeCardSelection(int cardId);
 	void enableToSelectCard() const;
 	void removeSelectedCards() const;
+	void clearView();
 
 private:
 	int _positionX;

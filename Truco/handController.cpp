@@ -21,8 +21,6 @@ void handController::createGame(teamController* teamList) {
 
 void handController::loadNewSet()
 {
-	_deckSettings.clear();
-
 	for (auto& player : _teamSettings->getTeamPlayers(0)) {
 		player->clearDeck();
 	}
@@ -37,6 +35,8 @@ void handController::loadNewSet()
 	setCurrentPlayer();
 
 	_hand.setValue = 1;
+
+	_remainingSets = 3;
 
 	displayHand();
 }
@@ -55,6 +55,9 @@ void handController::executeHandAction(WPARAM wParam)
 	currentSet->executeSetAction(wParam);
 
 	if (currentSet->setIsFinished()) {
+		_hand.winner = currentSet->getSetWinnerPlayer();
+		setTeamSetScore();
+
 		for (auto& player : _teamSettings->getTeamPlayers(0)) {
 			player->removedSelectedCard();
 		}
@@ -63,12 +66,23 @@ void handController::executeHandAction(WPARAM wParam)
 		}
 
 		currentSet->reloadSetMoves();
+		_remainingSets--;
 	}
 
-	setCurrentPlayer();
-	currentSet->setCurrentPlayer(_hand.startPlayer);
-	currentSet->startSet();
+	if (hasHandFinished()) {
+		setTeamScore();
+	}
+	else
+	{
+		setCurrentPlayer();
+		currentSet->setCurrentPlayer(_hand.startPlayer);
+		currentSet->startSet();
+	}
+}
 
+bool handController::hasHandFinished()
+{
+	return _remainingSets <= 0;
 }
 
 void handController::createShuffledDeck() {
@@ -113,6 +127,7 @@ void handController::createSet() {
 	setController setSettings;
 
 	setSettings.setCurrentPlayer(_hand.startPlayer);
+	setSettings.setManilhaCard(_hand.manilha);
 
 	setSettings.startSet();
 	_hand.setList.push_back(std::make_shared<setController>(setSettings));
@@ -128,6 +143,17 @@ void handController::setSetValue() {
 	}
 	else if (_hand.setValue == 1) {
 		_hand.setValue = 3;
+	}
+}
+
+void handController::setTeamSetScore()
+{
+	_teamSettings->giveSetScoreToWinner(_hand.setValue, _hand.winner);
+
+	for (int i = 0; i < _teamSettings->getTeamListCount(); i++) {
+		if (_teamSettings->showSetScore(i) == 2) {
+			_remainingSets = 0;
+		}
 	}
 }
 

@@ -70,11 +70,24 @@ int teamController::getTeamListCount()
 	return teamList.size();
 }
 
-int teamController::showScore(int teamId) {
+void teamController::giveSetScoreToWinner(int score, playerController winner)
+{
+	for (auto& team : teamList)
+	{
+		for (auto& player : team->members) {
+			if (player->getName()._Equal(winner.getName())) {
+				team->setScore += score;
+			}
+		}
+	}
+}
+
+int teamController::showSetScore(int teamId)
+{
 	for (auto& team : teamList)
 	{
 		if (team->teamId == teamId) {
-			return team->score;
+			return team->setScore;
 		}
 	}
 	return -1;
@@ -87,8 +100,19 @@ void teamController::giveScoreToWinner(int score, playerController winner) {
 			if (player->getName()._Equal(winner.getName())) {
 				team->score += score;
 			}
+			team->setScore = 0;
 		}
 	}
+}
+
+int teamController::showScore(int teamId) {
+	for (auto& team : teamList)
+	{
+		if (team->teamId == teamId) {
+			return team->score;
+		}
+	}
+	return -1;
 }
 
 void teamController::distributeCards(deckController* deckSettings) {

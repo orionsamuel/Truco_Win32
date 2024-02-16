@@ -113,6 +113,14 @@ void gameController::executeAction(WPARAM wParam)
 	if (wParam >= _gameBaseId + 10) {
 		//Players actions
 		_handSettings.executeHandAction(wParam);
+
+		_gameView.updateSetScore(getSetScoreData());
+	}
+
+	if (_handSettings.hasHandFinished()) {
+		_handSettings.loadNewSet();
+		_gameView.updateSetScore(getSetScoreData());
+		_gameView.updateTeamScore(getScoreData());
 	}
 }
 
@@ -155,6 +163,7 @@ void gameController::loadPlayers(int quantity)
 void gameController::drawGame()
 {
 	_gameView.displayTeamScore(getScoreData(), _parentWindow, _gameBaseId + 2);
+	_gameView.displaySetScore(getSetScoreData(), _parentWindow, _gameBaseId + 3);
 	_handSettings.displayHand();
 }
 
@@ -163,6 +172,16 @@ std::string gameController::getScoreData()
 	std::string score = "## SCORE ##";
 	for (int t = 0; t < _teamSettings.getTeamListCount(); t++) {
 		score += "\r\n" + _teamSettings.getTeamName(t) + ": " + std::to_string(_teamSettings.showScore(t)) + " points";
+	}
+
+	return score;
+}
+
+std::string gameController::getSetScoreData()
+{
+	std::string score = "## SET SCORE ##";
+	for (int t = 0; t < _teamSettings.getTeamListCount(); t++) {
+		score += "\r\n" + _teamSettings.getTeamName(t) + ": " + std::to_string(_teamSettings.showSetScore(t)) + " points";
 	}
 
 	return score;

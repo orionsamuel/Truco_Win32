@@ -10,5 +10,6 @@ public:
     std::string teamName;
     std::vector<std::shared_ptr<playerController>> members;
     int score;
+    int setScore;
 };
 
