@@ -22,6 +22,62 @@ O programa gerado emula um jogo de truco com regras baseadas no truco paulista o
 - Interface gráfica intuitiva
 - Regras do truco paulista
 
+### Classes Principais
+
+1. **game**
+Armazena as informações necessárias para o gerenciamento de um jogo completo de truco contendo mãos e vazas.
+
+- `playerList`: Lista dos jogadores participantes;
+- `handList`: Conjunto de mãos do jogo;
+- `winnerPlayer`: Jogador vencedor da partida;
+- `teamList`: Lista de times participantes no jogo;
+
+2. **hand**
+Armazena as informações necessárias para o gerenciamento de uma mão do truco contendo vazas
+
+- `manilha`: Carta manilha;
+- `keyCard`: Última carta a ser exibida;
+- `setList`: Conjunto de sets contidos na mão;
+- `winner`: Player que foi o vencedor da mão;
+- `maoValue`: Valor da mão;
+- `trucoPlayer`: Player que pediu truco;
+- `startPlayer`: Player que começa a vaza;
+
+3. **set**
+Armazena as informações necessárias para o gerenciamento de uma vaza do truco
+
+- `cardList`: Lista de cartas do set;
+- `currentPlayer`: Player que está na vez de jogar;
+- `winnerPlayer`: Player vencedor da vaza;
+- `strongestCard`: Carta mais forte da vaza;
+- `startPlayer`: Player que inicia a vaza;
+
+4. **deck**
+Armazena uma coleção de cartas, pode ser interpretado como o baralho ou mesmo a coleção de cartas de cada jogador.
+
+- `baseCards`: Coleção de cartas, pode ser interpretado como o baralho ou mesmo a coleção de cartas de cada jogador;
+
+5. **card**
+Representa uma carta individual, contendo valor e naipe.
+
+- `suit`: Naipe da carta;
+- `value`: Valor da carta;
+
+6. **player**
+Contém informações sobre o jogador, incluindo o nome e o tipo.
+
+- `name`: Nome do jogador;
+- `type`: Tipo do jogador (CPU or Player);
+
+7. **team**
+Contém informações sobre o time.
+
+- `teamId`: Código do time
+- `teamName`: Nome do time;
+- `members`: Conjunto de Players que estão no time;
+- `score`: Pontuação atual do time;
+
+
 ## Como jogar
 
 1. Inicie o jogo clicando em Play Game.
