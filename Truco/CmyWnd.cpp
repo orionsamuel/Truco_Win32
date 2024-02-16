@@ -11,7 +11,6 @@ CMyWnd::CMyWnd()
 	createTitle(this);
 
 	_startButton->create(_T("Play Game"), maxWidth/2 - 75, 320, this, 1);
-	//_startButton->Create(_T("Play Game"), WS_CHILD | WS_VISIBLE, CRect(550, 320, 650, 350), this, 1);
 
 	_gameControl = gameController(this, 10);
 }
@@ -51,28 +50,10 @@ void CMyWnd::createTitle(CFrameWnd* parent) {
 void CMyWnd::ExecuteActionById(WPARAM wParam)
 {
 	_gameControl.executeAction(wParam);
-	/*if (wParam >= player4.getBaseId()) {
-		player4.selectCard(wParam);
-	}
-	else if (wParam >= player3.getBaseId()) {
-		player3.selectCard(wParam);
-	}
-	else if (wParam >= player2.getBaseId()) {
-		player2.selectCard(wParam);
-	}
-	else if (wParam >= player1.getBaseId()) {
-		player1.selectCard(wParam);
-	}*/
 }
 
 void CMyWnd::OnButtonClick()
 {
-	/*player1.displayCard();
-	player2.displayCard();
-	player3.displayCard();
-	player4.displayCard();
-	*/
-
 	_titleLabel->DestroyWindow();
 	_startButton->DestroyWindow();
 

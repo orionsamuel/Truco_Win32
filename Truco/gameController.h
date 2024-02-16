@@ -31,9 +31,12 @@ private:
 	game _game;
 	handController _handSettings;
 	teamController _teamSettings;
+
+	int _maxScore = 12;
 	
 	void loadPlayers(int quantity);
 	void drawGame();
 	std::string getScoreData();
 	std::string getSetScoreData();
+	bool hasGameFinished();
 };

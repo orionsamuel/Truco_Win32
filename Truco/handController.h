@@ -1,4 +1,6 @@
 #pragma once
+#include <mmsystem.h>
+
 #include "playerController.h"
 #include "teamController.h"
 #include "hand.h"
@@ -16,6 +18,7 @@ public:
 	void displayHand();
 	void executeHandAction(WPARAM wParam);
 	bool hasHandFinished();
+	int getHandWorth();
 
 private:
 	CFrameWnd* _parentWindow;
@@ -36,7 +39,8 @@ private:
 	void setStarterPlayer(playerController player);
 	void createSet();
 	void setTrucoPlayer(playerController player);
-	void setSetValue();
+	void setHandValue();
+	void playTrucoSound();
 	void setTeamSetScore();
 	void setTeamScore();
 	void setCurrentPlayer();

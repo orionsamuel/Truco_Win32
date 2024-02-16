@@ -98,6 +98,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>winmm.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -238,6 +239,20 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Truco.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="truco_12.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="truco_3.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="truco_6.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="truco_9.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

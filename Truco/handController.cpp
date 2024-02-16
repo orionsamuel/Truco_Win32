@@ -48,38 +48,48 @@ void handController::displayHand()
 
 void handController::executeHandAction(WPARAM wParam)
 {
-	auto currentSet = _hand.setList.back();
-	currentSet->executeSetAction(wParam);
-
-	if (currentSet->setIsFinished()) {
-		_hand.winner = currentSet->getSetWinnerPlayer();
-		setTeamSetScore();
-
-		for (auto& player : _teamSettings->getTeamPlayers(0)) {
-			player->removedSelectedCard();
-		}
-		for (auto& player : _teamSettings->getTeamPlayers(1)) {
-			player->removedSelectedCard();
-		}
-
-		currentSet->reloadSetMoves();
-		_remainingSets--;
+	if (wParam == _handId) {
+		setHandValue();
 	}
+	else {
+		auto currentSet = _hand.setList.back();
+		currentSet->executeSetAction(wParam);
 
-	if (hasHandFinished()) {
-		setTeamScore();
-	}
-	else
-	{
-		setCurrentPlayer();
-		currentSet->setCurrentPlayer(_hand.startPlayer);
-		currentSet->startSet();
+		if (currentSet->setIsFinished()) {
+			_hand.winner = currentSet->getSetWinnerPlayer();
+			setTeamSetScore();
+
+			for (auto& player : _teamSettings->getTeamPlayers(0)) {
+				player->removedSelectedCard();
+			}
+			for (auto& player : _teamSettings->getTeamPlayers(1)) {
+				player->removedSelectedCard();
+			}
+
+			currentSet->reloadSetMoves();
+			_remainingSets--;
+		}
+
+		if (hasHandFinished()) {
+			setTeamScore();
+		}
+		else
+		{
+			setCurrentPlayer();
+			currentSet->setCurrentPlayer(_hand.startPlayer);
+			currentSet->startSet();
+		}
 	}
 }
 
 bool handController::hasHandFinished()
 {
 	return _remainingSets <= 0;
+}
+
+int handController::getHandWorth()
+{
+	return _hand.handValue;
 }
 
 void handController::createShuffledDeck() {
@@ -135,18 +145,40 @@ void handController::setTrucoPlayer(playerController player) {
 	_hand.trucoPlayer = player;
 }
 
-void handController::setSetValue() {
-	if (_hand.handValue > 1 || _hand.handValue < 12) {
+void handController::setHandValue() {
+	if (_hand.handValue > 1 && _hand.handValue < 12) {
 		_hand.handValue += 3;
 	}
 	else if (_hand.handValue == 1) {
 		_hand.handValue = 3;
 	}
+
+	playTrucoSound();
+
+	if (_hand.handValue == 12) {
+		_handView.enableTrucoButton(false);
+	}
+}
+
+void handController::playTrucoSound()
+{
+	if (_hand.handValue <= 3) {
+		PlaySound(TEXT("truco_3.wav"), NULL, SND_FILENAME | SND_SYNC);
+	}
+	else if (_hand.handValue <= 6) {
+		PlaySound(TEXT("truco_6.wav"), NULL, SND_FILENAME | SND_SYNC);
+	}
+	else if (_hand.handValue <= 9) {
+		PlaySound(TEXT("truco_9.wav"), NULL, SND_FILENAME | SND_SYNC);
+	}
+	else if (_hand.handValue <= 12) {
+		PlaySound(TEXT("truco_12.wav"), NULL, SND_FILENAME | SND_SYNC);
+	}
 }
 
 void handController::setTeamSetScore()
 {
-	_teamSettings->giveSetScoreToWinner(_hand.handValue, _hand.winner);
+	_teamSettings->giveSetScoreToWinner(1, _hand.winner);
 
 	for (int i = 0; i < _teamSettings->getTeamListCount(); i++) {
 		if (_teamSettings->showSetScore(i) == 2) {

@@ -24,8 +24,8 @@ void gameView::displaySetScore(std::string scoreText, CFrameWnd* pParentWnd, UIN
 {
 	int posX = 30;
 	int posY = 130;
-	int width = 200;
-	int height = 200;
+	int width = 250;
+	int height = 250;
 
 	CString teamScore = CString(scoreText.c_str());
 

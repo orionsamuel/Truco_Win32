@@ -110,17 +110,22 @@ void gameController::showWinner()
 
 void gameController::executeAction(WPARAM wParam)
 {
-	if (wParam >= _gameBaseId + 10) {
+	//_gameBaseId + 1 is base id from hand controller
+	if (wParam >= _gameBaseId + 1) {
 		//Players actions
 		_handSettings.executeHandAction(wParam);
 
 		_gameView.updateSetScore(getSetScoreData());
-	}
 
-	if (_handSettings.hasHandFinished()) {
-		_handSettings.loadNewSet();
-		_gameView.updateSetScore(getSetScoreData());
-		_gameView.updateTeamScore(getScoreData());
+		if (_handSettings.hasHandFinished()) {
+			_gameView.updateTeamScore(getScoreData());
+
+			if (!hasGameFinished()) {
+				_handSettings.loadNewSet();
+				_gameView.updateSetScore(getSetScoreData());
+			}
+
+		}
 	}
 }
 
@@ -172,6 +177,9 @@ std::string gameController::getScoreData()
 	std::string score = "## SCORE ##";
 	for (int t = 0; t < _teamSettings.getTeamListCount(); t++) {
 		score += "\r\n" + _teamSettings.getTeamName(t) + ": " + std::to_string(_teamSettings.showScore(t)) + " points";
+		if (_teamSettings.showScore(t) >= _maxScore) {
+			score += " ***";
+		}
 	}
 
 	return score;
@@ -184,5 +192,24 @@ std::string gameController::getSetScoreData()
 		score += "\r\n" + _teamSettings.getTeamName(t) + ": " + std::to_string(_teamSettings.showSetScore(t)) + " points";
 	}
 
+	score += "\r\n\r\n** Hand worth: " + std::to_string(_handSettings.getHandWorth()) + " points **";
+
 	return score;
+}
+
+bool gameController::hasGameFinished()
+{
+	for (int i = 0; i < _teamSettings.getTeamListCount(); i++) {
+		if (_teamSettings.showScore(i) >= _maxScore)
+		{
+			std::string winnerMessage = "The winner team is: " + _teamSettings.getTeamName(i) + "!\r\nThank you to play this awesome game!!";
+			CString message = CString(winnerMessage.c_str());
+			MessageBox(nullptr, message, TEXT("Winner Team"), MB_OK);
+			_parentWindow->PostMessageW(WM_CLOSE);
+
+			return true;
+		}
+	}
+
+	return false;
 }
