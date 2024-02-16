@@ -14,9 +14,7 @@ void handController::createGame(teamController* teamList) {
 	distributeCards();
 	setManilha();
 
-	setCurrentPlayer();
-
-	_hand.setValue = 1;
+	_hand.handValue = 1;
 }
 
 void handController::loadNewSet()
@@ -32,9 +30,7 @@ void handController::loadNewSet()
 	distributeCards();
 	setManilha();
 
-	setCurrentPlayer();
-
-	_hand.setValue = 1;
+	_hand.handValue = 1;
 
 	_remainingSets = 3;
 
@@ -46,6 +42,7 @@ void handController::displayHand()
 	_handView.displayView(_hand, _parentWindow, _handId);
 
 	_teamSettings->showAllPlayers();
+
 	createSet();
 }
 
@@ -108,10 +105,10 @@ void handController::setManilha() {
 	int width = 90;
 	int posX = 1350 / 2 - width / 2;
 
-	_hand.lastMountCard = cardController(posX, 160, _parentWindow, _handId);
+	_hand.keyCard = cardController(posX, 160, _parentWindow, _handId);
 
 	cardController lastCard = _deckSettings.popCard();
-	_hand.lastMountCard.createCard(lastCard.getSuit(), lastCard.getValue());
+	_hand.keyCard.createCard(lastCard.getSuit(), lastCard.getValue());
 
 	int manilhaId = static_cast<int>(lastCard.getValue());
 	manilhaId++;
@@ -124,8 +121,9 @@ void handController::setStarterPlayer(playerController player) {
 }
 
 void handController::createSet() {
-	setController setSettings;
+	setCurrentPlayer();
 
+	setController setSettings;
 	setSettings.setCurrentPlayer(_hand.startPlayer);
 	setSettings.setManilhaCard(_hand.manilha);
 
@@ -138,17 +136,17 @@ void handController::setTrucoPlayer(playerController player) {
 }
 
 void handController::setSetValue() {
-	if (_hand.setValue > 1 || _hand.setValue < 12) {
-		_hand.setValue += 3;
+	if (_hand.handValue > 1 || _hand.handValue < 12) {
+		_hand.handValue += 3;
 	}
-	else if (_hand.setValue == 1) {
-		_hand.setValue = 3;
+	else if (_hand.handValue == 1) {
+		_hand.handValue = 3;
 	}
 }
 
 void handController::setTeamSetScore()
 {
-	_teamSettings->giveSetScoreToWinner(_hand.setValue, _hand.winner);
+	_teamSettings->giveSetScoreToWinner(_hand.handValue, _hand.winner);
 
 	for (int i = 0; i < _teamSettings->getTeamListCount(); i++) {
 		if (_teamSettings->showSetScore(i) == 2) {
@@ -158,7 +156,7 @@ void handController::setTeamSetScore()
 }
 
 void handController::setTeamScore() {
-	_teamSettings->giveScoreToWinner(_hand.setValue, _hand.winner);
+	_teamSettings->giveScoreToWinner(_hand.handValue, _hand.winner);
 }
 
 void handController::setCurrentPlayer()

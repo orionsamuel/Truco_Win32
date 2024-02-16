@@ -47,11 +47,8 @@ void setController::setWinnerCard(cardController card)
 	}
 	//Selected card is manilha
 	else if (_manilhaCard.getValue() == card.getValue()) {
-		//change best card if current best card value is different from card value OR are equals but the card suit is better than best card suit
-		if (_bestCard.getSuit() < card.getSuit()) {
-			_bestCard = card;
-			_winnerPlayer = _currentPlayer;
-		}
+		_bestCard = card;
+		_winnerPlayer = _currentPlayer;
 	}
 	else {
 		//change best card if current best card value is less than the card value

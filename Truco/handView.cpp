@@ -3,8 +3,8 @@
 
 void handView::displayView(hand handModel, CFrameWnd* pParentWnd, UINT nID)
 {
-	handModel.lastMountCard.displayCard();
-	handModel.lastMountCard.enableCard(false);
+	handModel.keyCard.displayCard();
+	handModel.keyCard.enableCard(false);
 
 	std::string manilha = "The manilha card is: " + converters::convertValueToString(handModel.manilha.getValue());
 
