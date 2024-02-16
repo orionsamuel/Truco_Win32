@@ -4,11 +4,11 @@
 
 class hand{
 public:
-    cardController lastMountCard;
+    cardController keyCard;
     cardController manilha;
     std::vector<std::shared_ptr<setController>> setList;
     playerController winner;
-    int setValue;
+    int handValue;
     playerController trucoPlayer;
     playerController startPlayer;
 };
