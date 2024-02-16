@@ -1,17 +1,47 @@
 #include "pch.h"
 #include "cardView.h"
 
-cardView::cardView(CFrameWnd* parent)
+cardView::cardView(int positionX, int positionY, int selectedPosX, int selectedPosY, CFrameWnd* pParentWnd, UINT nID)
 {
-	button->Create(_T("Clique"), WS_CHILD | WS_VISIBLE, CRect(10, 10, 100, 30), parent, 1);
-	suitTextfield->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(10, 40, 100, 60), parent, 1);
-	valueTextfield->Create(ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER, CRect(10, 70, 100, 90), parent, 2);
+	_positionX = positionX;
+	_positionY = positionY;
+	_selectedPosX = selectedPosX;
+	_selectedPosY = selectedPosY;
+	_parentWindow = pParentWnd;
+	_cardId = nID;
 }
-void cardView::displayCard(card c) const
+
+void cardView::displayCard(card* cardModel, bool isEnabled) const
 {
-	CString sWindowText;
-	CString sWindowText2;
-	valueTextfield->GetWindowText(sWindowText);
-	suitTextfield->GetWindowText(sWindowText2);
-	AfxMessageBox(_T("Carta selecionada: " + sWindowText + " " + sWindowText2));
+	CString cardText = CString(cardModel->getCardDescription().c_str());
+	_card->create(cardText, _positionX, _positionY, _parentWindow, _cardId);
+
+	_card->enableButton(isEnabled);
+}
+
+void cardView::enableCard(bool isEnabled) const
+{
+	_card->enableButton(isEnabled);
+}
+
+void cardView::collapseCard() const
+{
+	_card->collapseButton();
+}
+
+void cardView::selectCard() const
+{
+	_card->setSelectedStatus(true);
+	_card->moveButton(_selectedPosX, _selectedPosY);
+}
+
+void cardView::deselectCard() const
+{
+	_card->setSelectedStatus(false);
+	_card->reloadButtonPosition();
+}
+
+bool cardView::hasCardSelected() const
+{
+	return _card->getSelectedStatus();
 }

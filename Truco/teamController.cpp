@@ -2,49 +2,55 @@
 #include "teamController.h"
 
 
-int teamController::createTeam(std::string name) {
-	int result;
+void teamController::createTeam(std::string name) {
 	std::shared_ptr<team> newTeam = std::make_shared<team>();
 	newTeam->teamName = name;
 	newTeam->score = 0;
-	newTeam->teamId = 0; // Confirm the logic of this attribute
+	newTeam->teamId = teamList.size(); // Confirm the logic of this attribute
 	teamList.emplace_back(newTeam);
-	
-	result = newTeam->score; // Confirm what should be the output of it
-	return result;
 }
 
-std::string teamController::getTeamName(team teamName) const {
-	return teamName.teamName;
+std::string teamController::getTeamName(int teamId) const {
+	if (teamList.size() > teamId) {
+		return teamList[teamId]->teamName;
+	}
+	return std::string();
 }
 
-void teamController::addPlayers(std::string teamName, std::string name) {
-	playerController playerSettings;
-	playerSettings.createPlayer(name);
+void teamController::addPlayers(int teamId, playerController playerSettings)
+{
+	if (!teamList.empty() && teamList.size() > teamId)
+	{
+		teamList[teamId]->members.push_back(std::make_shared<playerController>(playerSettings));
+	}
+}
 
+void teamController::showAllPlayers()
+{
 	for (auto& team : teamList)
 	{
-		if (team->teamName._Equal(teamName)) {
-			team->members.push_back(std::make_shared<playerController>(playerSettings));
+		showTeamPlayers(team->teamId);
+	}
+}
+
+void teamController::showTeamPlayers(int teamId) {
+	if (!teamList[teamId]->members.empty()) {
+		for (auto& player : teamList[teamId]->members) {
+			player->displayPlayer();
 		}
 	}
 }
 
-void teamController::addPlayers(std::string name) {
-	playerController playerSettings;
-	playerSettings.createPlayer(name);
-	
-	teamList[0]->members.push_back(std::make_shared<playerController>(playerSettings));
-}
-
-std::vector<std::shared_ptr<playerController>> teamController::showPlayers(int teamId) {
-	for (auto& team : teamList)
-	{
-		if (team->teamId == teamId) {
-			return team->members;
+std::vector<std::shared_ptr<playerController>> teamController::getTeamPlayers(int teamId)
+{
+	std::vector<std::shared_ptr<playerController>> playersList;
+	if (teamList.size() > teamId) {
+		for (auto& player : teamList[teamId]->members) {
+			playersList.push_back(player);
 		}
 	}
-	return std::vector<std::shared_ptr<playerController>>();
+
+	return playersList;
 }
 
 std::shared_ptr<playerController> teamController::getPlayer(std::string playerName) {
@@ -59,11 +65,29 @@ std::shared_ptr<playerController> teamController::getPlayer(std::string playerNa
 	return std::shared_ptr<playerController>();
 }
 
-int teamController::showScore(int teamId) {
+int teamController::getTeamListCount()
+{
+	return teamList.size();
+}
+
+void teamController::giveSetScoreToWinner(int score, playerController winner)
+{
+	for (auto& team : teamList)
+	{
+		for (auto& player : team->members) {
+			if (player->getName()._Equal(winner.getName())) {
+				team->setScore += score;
+			}
+		}
+	}
+}
+
+int teamController::showSetScore(int teamId)
+{
 	for (auto& team : teamList)
 	{
 		if (team->teamId == teamId) {
-			return team->score;
+			return team->setScore;
 		}
 	}
 	return -1;
@@ -76,17 +100,28 @@ void teamController::giveScoreToWinner(int score, playerController winner) {
 			if (player->getName()._Equal(winner.getName())) {
 				team->score += score;
 			}
+			team->setScore = 0;
 		}
 	}
 }
 
-void teamController::distributeCards(deckController deckSettings) {
+int teamController::showScore(int teamId) {
+	for (auto& team : teamList)
+	{
+		if (team->teamId == teamId) {
+			return team->score;
+		}
+	}
+	return -1;
+}
+
+void teamController::distributeCards(deckController* deckSettings) {
 	const int max_card_number = 3;
 	for (int i = 0; i < max_card_number; i++) {
 		for (auto& team : teamList)
 		{
 			for (auto& player : team->members) {
-				player->addCard(deckSettings.popCard());
+				player->addCard(deckSettings->popCard());
 			}
 		}
 	}

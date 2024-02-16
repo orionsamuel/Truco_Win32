@@ -10,20 +10,26 @@
 class cardController
 {
 public:
+	UINT cardId;
+
 	cardController() = default;
-	cardController(card& c, cardView& cv);
-	void createCard(Suit s, Value v);
-	void displayCard();
+	cardController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID);
+	cardController(int positionX, int positionY, int selectedPosX, int selectedPosY, CFrameWnd* pParentWnd, UINT nID);
+
+	void createCard(Suit suit, Value value);
+	void displayCard(bool isEnabled = true);
 	card getCard();
 	Suit getSuit();
 	Value getValue();
 	void generateCard();
+	void enableCard(bool isEnabled = true) const;
+	bool changeCardSelection();
+	bool hasCardSelected() const;
+	void collapseCard() const;
 
 private:
-	card c;
-	cardView cv;
-	std::mt19937 randomEngine;
-
-	int getRandomNumber(int min, int max);
+	card _card;
+	cardView* _cardView;
+	static std::mt19937 randomEngine;
 };
 
