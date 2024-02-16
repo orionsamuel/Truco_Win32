@@ -30,6 +30,6 @@ public:
 private:
 	card _card;
 	cardView* _cardView;
-	std::mt19937 randomEngine;
+	static std::mt19937 randomEngine;
 };
 

@@ -6,18 +6,16 @@
 std::uniform_int_distribution<int> randomValues(0, 9);
 std::uniform_int_distribution<int> randomSuits(0, 3);
 
-cardController::cardController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID) : randomEngine(std::random_device{}())
-{
-	srand(time(NULL));
+std::mt19937 cardController::randomEngine = std::mt19937(std::random_device{}());
 
+cardController::cardController(int positionX, int positionY, CFrameWnd* pParentWnd, UINT nID)
+{
 	cardId = nID;
 	_cardView = new cardView(positionX, positionY, positionX, positionY, pParentWnd, nID);
 }
 
-cardController::cardController(int positionX, int positionY, int selectedPosX, int selectedPosY, CFrameWnd* pParentWnd, UINT nID) : randomEngine(std::random_device{}()) {
-
-	srand(time(NULL));
-
+cardController::cardController(int positionX, int positionY, int selectedPosX, int selectedPosY, CFrameWnd* pParentWnd, UINT nID)
+{
 	cardId = nID;
 	_cardView = new cardView(positionX, positionY, selectedPosX, selectedPosY, pParentWnd, nID);
 }
