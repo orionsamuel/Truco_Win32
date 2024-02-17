@@ -21,6 +21,18 @@ O programa gerado emula um jogo de truco com regras baseadas no truco paulista o
 - Jogo de truco para dois jogadores
 - Interface gráfica intuitiva
 - Regras do truco paulista
+## Como jogar
+
+1. Inicie o jogo clicando em Play Game.
+2. Os jogadores recebem cartas do deck no início de cada mão.
+3. Os jogadores se revezam para fazer suas jogadas. Para escolher, basta clicar na carta escolhida.
+4. A mão continua até que todas as cartas sejam jogadas.
+5. O vencedor da mão é determinado com base nas regras padrões do truco, levando em consideração as cartas na mão dos jogadores e a carta Manilha que fica na região acima da tela.
+
+## Tecnologias utilizadas
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
+- C++
+- Win32 API
 
 ### Classes Principais
 
@@ -77,20 +89,9 @@ Contém informações sobre o time.
 - `members`: Conjunto de Players que estão no time;
 - `score`: Pontuação atual do time;
 
+## Diagrama de Classes
+![Diagrama de classes](Documents/diagrama.drawio.png?raw=true "Title")
 
-## Como jogar
 
-1. Inicie o jogo clicando em Play Game.
 
-2. Os jogadores recebem cartas do deck no início de cada mão.
 
-3. Os jogadores se revezam para fazer suas jogadas. Para escolher, basta clicar na carta escolhida.
-
-4. A mão continua até que todas as cartas sejam jogadas.
-
-5. O vencedor da mão é determinado com base nas regras padrões do truco, levando em consideração as cartas na mão dos jogadores e a carta Manilha que fica na região acima da tela.
-
-## Tecnologias utilizadas
-O projeto foi desenvolvido utilizando as seguintes tecnologias:
-- C++
-- Win32 API
